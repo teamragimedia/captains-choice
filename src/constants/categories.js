@@ -1,0 +1,17 @@
+export const categories = [
+  "All Products",
+  "Your Menu Add-ons",
+  "Fruits and Vegetables",
+  "Dairy",
+  "Masala, Salt & Sugar",
+  "Chicken & Eggs",
+  "Sauces & Seasoning",
+  "Edible Flowers & Microgreens",
+  "Canned & Imported Items",
+  "Edible Oils",
+  "Fresh Cut & Peeled",
+  "Frozen & Instant Food",
+  "Rice & Rice Products",
+  "Flours",
+  "Pulses",
+];

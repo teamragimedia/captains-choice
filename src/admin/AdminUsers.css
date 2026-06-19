@@ -1,0 +1,209 @@
+/* ================= PAGE ================= */
+.admin-users-page {
+  padding: 30px;
+  background: #f5f7fb;
+  font-family: "Quicksand", sans-serif;
+}
+
+/* HEADER */
+.page-header h2 {
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #111;
+  font-size: 36px;
+}
+
+.page-header p {
+  color: #000000;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.admin-users-page .field input,
+.admin-users-page .field select {
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
+  transition: 0.2s;
+  color: #000000;
+}
+
+/* ================= CARD ================= */
+.admin-users-page .card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* ================= FORM ================= */
+.admin-users-page .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.admin-users-page .field {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-users-page .field label {
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* INPUT */
+.admin-users-page .field input,
+.admin-users-page .field select {
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.admin-users-page .field input:focus,
+.admin-users-page .field select:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* ================= BUTTONS ================= */
+.admin-users-page .primary-btn {
+  background: #1e40af;
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.admin-users-page .primary-btn:hover {
+  background: #1e40af;
+}
+
+.admin-users-page .secondary-btn {
+  background: #f3f4f6;
+  color: #111;
+  padding: 11px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-users-page .action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* ================= TABLE ================= */
+.admin-users-page .admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.admin-users-page .admin-table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.admin-users-page .admin-table td {
+  padding: 12px;
+  border-top: 1px solid #eef2f7;
+  font-size: 14px;
+  color: #000000;
+}
+.admin-users-page button {
+  margin-right: 5px;
+  padding: 6px 10px;
+  margin-top: 10px !important;
+}
+
+.admin-users-page .admin-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* ================= BADGES ================= */
+.admin-users-page .badge {
+  background: #2563eb;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.admin-users-page .role-badge {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+/* CARD HEADER */
+.admin-users-page .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* NO ACCESS */
+.admin-users-page .no-access {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+}
+
+.status.active {
+  background: #22c55e;
+}
+
+.status.inactive {
+  background: #ef4444;
+}
+
+/* ACTION COLUMN FIX */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers horizontally */
+  gap: 8px; /* space between buttons */
+}
+
+/* SAME WIDTH BUTTONS */
+.action-buttons button {
+  width: 120px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* OPTIONAL: make table cells aligned */
+.admin-table td {
+  vertical-align: middle;
+  text-align: center;
+}

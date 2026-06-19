@@ -1,0 +1,156 @@
+/* =========================
+   VENDOR CTA SECTION
+========================= */
+
+.vendor-section {
+  padding: 80px;
+  background: #f5f6f8;
+}
+
+/* CARD CONTAINER */
+.vendor-container {
+  max-width: 1730px;
+  margin: auto;
+  background: #123c97; /* deep blue */
+  border-radius: 14px;
+  padding: 50px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* =========================
+   LEFT CONTENT
+========================= */
+
+.vendor-left {
+  flex: 1;
+  color: #fff;
+}
+
+/* HEADING */
+.vendor-left h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* SUBTEXT */
+.vendor-left .subtitle {
+  font-size: 15.3px;
+  color: #cbd5f5;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+/* POINTS */
+.vendor-points {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 25px;
+}
+
+.vendor-points li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15.5px;
+  margin-bottom: 10px;
+  color: #e5edff;
+  font-weight: bold;
+}
+
+.vendor-points li img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ICON */
+.vendor-points img {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+/* BUTTON */
+.vendor-btn {
+  background: #f59e0b;
+  color: #123c97;
+  border: none;
+  padding: 23px 40px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.vendor-btn:hover {
+  background: #d97706;
+}
+
+/* NOTE */
+.vendor-left .note {
+  font-size: 11px;
+  color: #cbd5f5;
+  margin-top: 13.7px;
+}
+
+/* =========================
+   RIGHT IMAGE
+========================= */
+
+.vendor-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.vendor-right img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+  .vendor-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 25px;
+  }
+
+  .vendor-right {
+    justify-content: center;
+  }
+
+  .vendor-left .subtitle {
+    margin: auto;
+  }
+
+  .vendor-points {
+    align-items: center;
+  }
+
+  .vendor-points li {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .vendor-left h2 {
+    font-size: 22px;
+  }
+
+  .vendor-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,138 @@
+/* ========================= */
+/* SECTION */
+/* ========================= */
+
+.why-section {
+  background: linear-gradient(to bottom, #eff6ff, #f6faff);
+  padding: 80px 20px;
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.why-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.why-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.why-header p {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* ========================= */
+/* GRID */
+/* ========================= */
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.why-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.4s ease;
+}
+
+.why-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+}
+
+/* ICON */
+/* ICON */
+.why-icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+/* TITLE */
+
+.why-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* DESC */
+
+.why-card p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* LEARN MORE */
+.learn-more {
+  font-size: 14px;
+  color: #0c3ea8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.learn-more:hover {
+  letter-spacing: 0.3px;
+}
+
+.learn-more img {
+  width: 18px;
+  height: 18px;
+}
+
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+
+@media (max-width: 1024px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .why-section {
+    padding: 50px 15px;
+  }
+
+  .why-header h2 {
+    font-size: 24px;
+  }
+
+  .why-header p {
+    font-size: 14px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .why-card {
+    padding: 20px;
+  }
+}

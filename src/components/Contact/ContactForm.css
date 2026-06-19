@@ -1,0 +1,161 @@
+.contact-form-section {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+}
+
+.contact-form-card,
+.map-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.section-tag {
+  color: #f4a622;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.contact-form-card h2 {
+  margin-top: 12px;
+  color: #0a3b9e;
+  font-size: 38px;
+}
+
+.contact-form-card p {
+  color: #666;
+  margin: 15px 0 30px;
+  line-height: 1.8;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0a3b9e;
+}
+
+.input-group input {
+  width: 100%;
+  height: 58px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding-left: 50px;
+  font-size: 15px;
+  color: #333;
+}
+
+.full-width {
+  margin-top: 20px;
+}
+
+.full-width input {
+  width: 100%;
+}
+
+.contact-form textarea {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+  resize: none;
+  font-size: 15px;
+  color: #333;
+}
+
+.contact-form button {
+  margin-top: 25px;
+  background: #f4a622;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background: #df9515;
+}
+
+.map-header h3 {
+  color: #0a3b9e;
+  font-size: 30px;
+}
+
+.map-header p {
+  color: #666;
+  margin-top: 10px;
+}
+
+.map-container {
+  margin-top: 25px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 350px;
+  border: 0;
+}
+
+.office-info {
+  margin-top: 30px;
+}
+
+.office-item {
+  margin-bottom: 20px;
+}
+
+.office-item h4 {
+  color: #0a3b9e;
+  margin-bottom: 8px;
+}
+
+.office-item p {
+  color: #666;
+  line-height: 1.7;
+}
+
+@media (max-width: 991px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-card,
+  .map-card {
+    padding: 25px;
+  }
+
+  .contact-form-card h2 {
+    font-size: 30px;
+  }
+}

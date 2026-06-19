@@ -1,0 +1,189 @@
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-hero-bg {
+  position: relative;
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contact-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 59, 158, 0.78);
+}
+
+.contact-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 40px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-content {
+  max-width: 700px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.contact-content h1 {
+  color: #fff;
+  font-size: 64px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.contact-content p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 22px;
+  line-height: 1.7;
+  margin-bottom: 35px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 45px;
+}
+
+.btn-primary {
+  background: #f4a622;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #df9515;
+}
+
+.btn-secondary {
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: #fff;
+  color: #0a3b9e;
+}
+
+.hero-features {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f4a622;
+  font-size: 20px;
+}
+
+.feature h4 {
+  color: #fff;
+  margin: 0;
+  font-size: 18px;
+}
+
+.feature span {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 0 20px;
+    height: auto;
+    min-height: 600px;
+  }
+
+  .contact-content h1 {
+    font-size: 42px;
+  }
+
+  .contact-content p {
+    font-size: 18px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-features {
+    gap: 20px;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature-icon svg {
+  font-size: 18px;
+}
+
+.hero-badge svg {
+  color: #f4a622;
+  font-size: 16px;
+}

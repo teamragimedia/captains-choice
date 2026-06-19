@@ -1,0 +1,134 @@
+/* ================= CONTAINER ================= */
+.bp-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  margin-top: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* ================= TITLE ================= */
+.bp-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+/* ================= STATUS ================= */
+.bp-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.bp-status.review {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.bp-status.approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* ================= GRID ================= */
+.bp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ================= FIELD ================= */
+.bp-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.bp-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* ICON STYLE */
+.bp-field label svg {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+/* ================= INPUT ================= */
+.bp-field input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 14px;
+  color: #111827;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.bp-field input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* DISABLED INPUT */
+.bp-field input.disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* ================= BUTTON ================= */
+.bp-btn {
+  margin-top: 25px;
+}
+
+.primary {
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.primary:hover {
+  background: #1d4ed8;
+}
+
+/* REVIEW BUTTON */
+.review-btn {
+  background: #fbbf24;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* APPROVED BUTTON */
+.approved-btn {
+  background: #22c55e;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .bp-grid {
+    grid-template-columns: 1fr;
+  }
+}

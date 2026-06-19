@@ -1,0 +1,146 @@
+/* =========================
+   FAQ SECTION
+========================= */
+
+.faq-section {
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, #f3f4f7, #ffffff);
+}
+
+/* CENTER CONTAINER */
+.faq-container {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+/* HEADING */
+.faq-container h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1d3b8b;
+  margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.faq-container .subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+/* =========================
+   FAQ LIST
+========================= */
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* ITEM CARD */
+.faq-item {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 18px 20px;
+  cursor: pointer;
+  text-align: left;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+/* HOVER */
+.faq-item:hover {
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* QUESTION ROW */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* QUESTION TEXT */
+.faq-question span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d3b8b;
+}
+
+/* ICON */
+.faq-question .icon {
+  color: #f59e0b;
+  transition: transform 0.3s ease;
+  font-size: 12px;
+}
+
+/* ROTATE ICON WHEN ACTIVE */
+.faq-item.active .icon {
+  transform: rotate(180deg);
+}
+
+/* =========================
+   ANSWER
+========================= */
+
+.faq-answer {
+  overflow: hidden;
+}
+
+.faq-answer p {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* =========================
+   BOTTOM CTA
+========================= */
+
+.faq-bottom {
+  margin-top: 40px;
+}
+
+.faq-bottom p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.faq-bottom button {
+  background: #f59e0b;
+  color: #1d3b8b;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.faq-bottom button:hover {
+  background: #d97706;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .faq-container h2 {
+    font-size: 24px;
+  }
+
+  .faq-item {
+    padding: 15px;
+  }
+
+  .faq-question span {
+    font-size: 13px;
+  }
+}

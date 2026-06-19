@@ -1,0 +1,177 @@
+/* =========================
+   SECTION
+========================= */
+.testimonials {
+  padding: 100px 40px;
+  background: #f6f9fe;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.testimonials-wrapper {
+  display: flex;
+  align-items: flex-start; /* ✅ FIX */
+  gap: 60px;
+}
+
+/* =========================
+   LEFT SIDE (FIXED)
+========================= */
+.left {
+  flex: 0.3 0 350px; /* prevents shrinking */
+}
+
+.left h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1d3b8b;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.left p {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.buttons button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #1d3b8b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* =========================
+   RIGHT CAROUSEL
+========================= */
+.right {
+  flex: 1;
+  overflow: hidden;
+  margin-top: 10px; /* fine-tune alignment */
+}
+
+/* TRACK */
+.track {
+  display: flex;
+  gap: 20px;
+  cursor: grab;
+  /* margin-top: 130px; */
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  flex: 0 0 400px; /* fixed width */
+  height: 400px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* IMAGE */
+.card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: contain !important;
+}
+
+/* NAME */
+.card h3 {
+  font-size: 20px;
+  color: #1d3b8b;
+  margin-bottom: 8px;
+}
+
+/* TEXT */
+.card p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* STARS */
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.stars svg {
+  color: #f59e0b;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 992px) {
+  .testimonials-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left {
+    flex: unset;
+    max-width: 100%;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .card {
+    flex: 0 0 80%;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 600px) {
+  .testimonials {
+    padding: 70px 20px;
+  }
+
+  .left h2 {
+    font-size: 24px;
+  }
+
+  .left p {
+    font-size: 14px;
+  }
+
+  .card {
+    flex: 0 0 100%;
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+}

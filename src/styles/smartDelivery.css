@@ -1,0 +1,153 @@
+/* =========================
+   SMART DELIVERY SECTION
+========================= */
+
+.smart-delivery {
+  position: relative;
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, #f8f9fc, #ffffff);
+  overflow: hidden;
+}
+
+/* =========================
+   LEFT IMAGE (DECORATIVE)
+========================= */
+
+.smart-delivery .delivery-left {
+  position: absolute;
+  left: 110px;
+  bottom: -161px;
+}
+
+.smart-delivery .delivery-left img {
+  width: 420px;
+  max-width: 40vw;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* =========================
+   CENTER CONTENT
+========================= */
+
+.smart-delivery .delivery-container {
+  max-width: 1700px;
+  margin: auto;
+  text-align: center; /* IMPORTANT */
+  position: relative;
+  z-index: 2;
+}
+
+/* HEADING */
+.smart-delivery .delivery-container h2 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #1d3b8b;
+  margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.smart-delivery .subtitle {
+  color: #6b7280;
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  line-height: 1.6;
+}
+
+/* =========================
+   STEPS (CENTERED ROW)
+========================= */
+
+.smart-delivery .steps {
+  display: flex;
+  justify-content: center; /* CENTER */
+  gap: 70px;
+  flex-wrap: wrap;
+}
+
+/* CARD */
+.smart-delivery .step-card {
+  width: 160px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+/* ICON */
+.smart-delivery .icon {
+  width: 64px;
+  height: 64px;
+  background: #f59e0b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+}
+
+/* REACT ICON */
+.smart-delivery .icon svg {
+  font-size: 32px;
+  color: white;
+}
+
+/* TEXT */
+.smart-delivery .step-card h4 {
+  color: #1d3b8b;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.smart-delivery .step-card p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* =========================
+   FLOAT ANIMATION
+========================= */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .smart-delivery .delivery-left img {
+    width: 300px;
+    opacity: 0.3; /* subtle background feel */
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .smart-delivery {
+    padding: 80px 15px;
+  }
+
+  .smart-delivery .delivery-left {
+    display: none; /* hide for clean mobile */
+  }
+
+  .smart-delivery .delivery-container h2 {
+    font-size: 24px;
+  }
+
+  .smart-delivery .steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+}

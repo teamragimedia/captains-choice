@@ -1,0 +1,121 @@
+/* ========================= */
+/* BASE (DESKTOP) */
+/* ========================= */
+
+.brand-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f6f8;
+  padding: 18px 0;
+  overflow: hidden;
+  height: 80px;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  white-space: nowrap;
+}
+
+.brand-left {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9aa0a6;
+  white-space: nowrap;
+}
+
+.brand-right {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.scroll-track {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  white-space: nowrap;
+  animation: scroll 10s linear infinite;
+}
+
+.scroll-track span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  white-space: nowrap;
+}
+
+/* ANIMATION */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+
+@media (max-width: 1024px) {
+  .brand-container {
+    gap: 25px;
+  }
+
+  .scroll-track {
+    gap: 40px;
+    animation: scroll 22s linear infinite; /* slower for readability */
+  }
+
+  .scroll-track span {
+    font-size: 14px;
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .brand-strip {
+    padding: 12px 0;
+  }
+
+  .brand-container {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .brand-left {
+    display: none;
+  }
+
+  .scroll-track {
+    gap: 30px;
+    animation: scroll 25s linear infinite; /* slower */
+  }
+
+  .scroll-track span {
+    font-size: 13px;
+  }
+}
+
+/* ========================= */
+/* 📱 SMALL MOBILE */
+/* ========================= */
+
+@media (max-width: 480px) {
+  .scroll-track {
+    gap: 20px;
+    animation: scroll 28s linear infinite;
+  }
+
+  .scroll-track span {
+    font-size: 12px;
+  }
+}
