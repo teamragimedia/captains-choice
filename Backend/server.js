@@ -159,6 +159,12 @@ app.use("/api/gst-reports", gstReportRoutes);
 app.use("/api/purchases", purchaseRoutes);
 app.use("/api/suppliers", supplierRoutes);
 
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
 /* ================= OTP ================= */
 
 const OTP_STORE = {};
@@ -267,12 +273,6 @@ VALUES (?)
 });
 
 /* ================= REACT BUILD ================= */
-
-app.use(express.static(path.join(__dirname, "../dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
-});
 
 /* ================= START ================= */
 

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "node Backend/server.js",
+    "start": "echo APP_STARTING && node Backend/server.js",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
