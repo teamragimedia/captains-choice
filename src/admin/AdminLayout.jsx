@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./admin.css";
+import "./Admin.css";
 import logo from "../assets/logoicon.png";
 import {
   FaChevronDown,
