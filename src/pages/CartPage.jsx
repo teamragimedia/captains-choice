@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "../styles/cartPage.css";
+import "../styles/CartPage.css";
 import { Link } from "react-router-dom";
 import BASE_URL from "../config";
 import API from "../api";
