@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../admin/admin.css";
+import "../../admin/Admin.css";
 import API from "../../api";
 
 function ProductAdmin() {
