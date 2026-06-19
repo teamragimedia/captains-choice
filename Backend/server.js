@@ -1,3 +1,5 @@
+throw new Error("SERVER START TEST");
+
 const express = require("express");
 const cors = require("cors");
 const db = require("./config/db");
