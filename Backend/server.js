@@ -120,9 +120,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /* ================= TEST ================= */
 
-app.get("/", (req, res) => {
-  res.send("🚀 Ecommerce API running");
-});
+// app.get("/", (req, res) => {
+//   res.send("🚀 Ecommerce API running");
+// });
 
 /* ================= ADMIN ================= */
 
@@ -264,6 +264,14 @@ VALUES (?)
       message: "Server Error",
     });
   }
+});
+
+/* ================= REACT BUILD ================= */
+
+app.use(express.static(path.join(__dirname, "../dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 /* ================= START ================= */
