@@ -9,9 +9,17 @@ const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 console.log("=== SERVER STARTING ===");
-console.log("PORT:", process.env.PORT);
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_NAME:", process.env.DB_NAME);
+console.log("PORT =", process.env.PORT);
+console.log("DB_HOST =", process.env.DB_HOST);
+console.log("DB_NAME =", process.env.DB_NAME);
+
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.error("UNHANDLED REJECTION:", err);
+});
 
 const app = express();
 
@@ -260,16 +268,17 @@ VALUES (?)
 
 /* ================= START ================= */
 
+(async () => {
+  try {
+    const [rows] = await db.query("SELECT 1");
+    console.log("DATABASE CONNECTED");
+  } catch (err) {
+    console.error("DATABASE ERROR:", err);
+  }
+})();
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-process.on("uncaughtException", (err) => {
-  console.error("UNCAUGHT EXCEPTION:", err);
-});
-
-process.on("unhandledRejection", (err) => {
-  console.error("UNHANDLED REJECTION:", err);
 });
