@@ -61,11 +61,11 @@ import Settings from "./admin/Settings";
 import StaffMembers from "./admin/StaffMembers";
 import Wishlist from "./admin/Wishlist";
 import RecurringOrders from "./admin/RecurringOrders";
-import SalesReport from "./admin/reports/SalesReport";
-import PurchaseReport from "./admin/reports/PurchaseReport";
-import TransactionReport from "./admin/reports/TransactionReport";
-import ComparisonReport from "./admin/reports/ComparisonReport";
-import ProfitReport from "./admin/reports/ProfitReport";
+import SalesReport from "./admin/Reports/SalesReport";
+import PurchaseReport from "./admin/Reports/PurchaseReport";
+import TransactionReport from "./admin/Reports/TransactionReport";
+import ComparisonReport from "./admin/Reports/ComparisonReport";
+import ProfitReport from "./admin/Reports/ProfitReport";
 import GSTReports from "./admin/Reports/GSTReports";
 import PurchaseAdmin from "./pages/admin/PurchaseAdmin";
 
