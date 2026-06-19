@@ -4,7 +4,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase";
 import "../styles/LoginPopup.css";
 import logo from "../assets/logo1.png";
-import groceryImage from "../assets/grocery.png";
+import groceryImage from "../assets/grocery.PNG";
 import { useNavigate } from "react-router-dom";
 
 import API from "../api";
