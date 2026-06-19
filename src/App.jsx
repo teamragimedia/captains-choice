@@ -33,7 +33,7 @@ import VendorCTA from "./pages/VendorCTA";
 import Testimonials from "./pages/Testimonials";
 
 // Shop
-import Shop from "./components/shop/Shop";
+import Shop from "./components/Shop/Shop";
 import CartPage from "./pages/CartPage";
 
 // Popup
