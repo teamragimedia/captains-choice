@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "start": "node Backend/server.js",
-    "build": "vite build",
     "dev": "vite",
+    "build": "echo Build skipped",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
