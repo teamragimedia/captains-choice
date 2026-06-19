@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "./admin.css";
+import "./Admin.css";
 import API from "../api";
 
 const ApprovalDetails = () => {
