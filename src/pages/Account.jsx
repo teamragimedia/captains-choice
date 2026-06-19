@@ -13,7 +13,7 @@ import RecurringOrders from "../components/Accounts/RecurringOrders";
 import Billing from "../components/Accounts/Billing";
 import Wishlist from "../components/Accounts/Wishlist";
 
-import "../styles/account.css";
+import "../styles/Account.css";
 
 const Account = () => {
   const [activeTab, setActiveTab] = useState("profile");
