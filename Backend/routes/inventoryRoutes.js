@@ -4,7 +4,7 @@ const router = express.Router();
 const {
   getInventory,
   addInventoryMovement,
-} = require("../controllers/inventoryController");
+} = require("../controllers/inventorycontroller");
 
 router.get("/", getInventory);
 
