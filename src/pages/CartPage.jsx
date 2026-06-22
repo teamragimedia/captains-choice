@@ -502,17 +502,16 @@ function CartPage() {
               <span>Total</span>
 
               <span>₹{total.toFixed(2)}</span>
-              <p
-                style={{
-                  fontSize: "12px",
-                  color: "#666",
-                  marginTop: "8px",
-                }}
-              >
-                * Prices are inclusive of GST
-              </p>
             </div>
-
+            <p
+              style={{
+                fontSize: "12px",
+                color: "#666",
+                marginTop: "8px",
+              }}
+            >
+              * Prices are inclusive of GST
+            </p>
             <button className="help-btn">📞 Need Help? Contact Us</button>
 
             <button className="checkout-btn" onClick={proceedToCheckout}>
