@@ -161,35 +161,12 @@ app.use("/api/gst-reports", gstReportRoutes);
 app.use("/api/purchases", purchaseRoutes);
 app.use("/api/suppliers", supplierRoutes);
 
-// app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static(path.join(__dirname, "../dist")));
 
-// app.get(/^\/(?!api).*/, (req, res) => {
-//   res.sendFile(path.join(__dirname, "../dist/index.html"));
-// });
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
 
-const fs = require("fs");
-
-const distPath = path.join(__dirname, "../dist");
-const indexPath = path.join(distPath, "index.html");
-
-if (fs.existsSync(indexPath)) {
-  console.log("DIST FOUND");
-
-  app.use(express.static(distPath));
-
-  app.get(/^\/(?!api).*/, (req, res) => {
-    res.sendFile(indexPath);
-  });
-} else {
-  console.log("DIST NOT FOUND");
-
-  app.get("/", (req, res) => {
-    res.json({
-      success: true,
-      message: "Captain's Choice API Running",
-    });
-  });
-}
 /* ================= OTP ================= */
 
 const OTP_STORE = {};
