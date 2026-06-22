@@ -137,10 +137,6 @@
     justify-content: center;
   }
 
-  .right {
-    width: 100%;
-  }
-
   .card {
     flex: 0 0 80%;
   }
