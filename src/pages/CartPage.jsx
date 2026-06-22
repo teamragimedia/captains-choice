@@ -180,9 +180,12 @@ function CartPage() {
 
   const gst = taxableAmount * 0.18;
 
-  const shipping = subtotal > 5000 ? 0 : 150;
+  // Product value INCLUDING GST
+  const orderValue = taxableAmount + gst;
 
-  const total = taxableAmount + gst + shipping;
+  const shipping = orderValue > 5000 ? 0 : 150;
+
+  const total = orderValue + shipping;
 
   // ================= EMPTY CART =================
 
@@ -479,25 +482,19 @@ function CartPage() {
 
             {/* TOTALS */}
             <div className="summary-row">
-              <span>Subtotal</span>
-
-              <span>₹{subtotal}</span>
+              <span>Order Value</span>
+              <span>₹{orderValue.toFixed(2)}</span>
             </div>
 
-            <div className="summary-row green">
-              <span>Discount ({discountPercent}%)</span>
+            {discountPercent > 0 && (
+              <div className="summary-row green">
+                <span>Discount ({discountPercent}%)</span>
+                <span>-₹{discount.toFixed(2)}</span>
+              </div>
+            )}
 
-              <span>-₹{discount.toFixed(2)}</span>
-            </div>
-
-            <div className="summary-row">
-              <span>GST (18%)</span>
-
-              <span>₹{gst.toFixed(2)}</span>
-            </div>
             <div className="summary-row">
               <span>Shipping</span>
-
               <span>{shipping === 0 ? "FREE" : `₹${shipping.toFixed(2)}`}</span>
             </div>
 
@@ -505,6 +502,15 @@ function CartPage() {
               <span>Total</span>
 
               <span>₹{total.toFixed(2)}</span>
+              <p
+                style={{
+                  fontSize: "12px",
+                  color: "#666",
+                  marginTop: "8px",
+                }}
+              >
+                * Prices are inclusive of GST
+              </p>
             </div>
 
             <button className="help-btn">📞 Need Help? Contact Us</button>
