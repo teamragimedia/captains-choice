@@ -93,7 +93,7 @@ const LoginPopup = ({ isOpen, onClose }) => {
 
       // update auth context
 
-      login(res.data.token);
+      login(res.data.token, res.data.customerId);
 
       alert("Login successful ✅");
 

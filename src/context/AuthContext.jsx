@@ -7,18 +7,29 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      setUser({ loggedIn: true });
+    const customerId = localStorage.getItem("customerId");
+
+    if (token && customerId) {
+      setUser({
+        loggedIn: true,
+        customerId,
+      });
     }
   }, []);
 
-  const login = (token) => {
+  const login = (token, customerId) => {
     localStorage.setItem("token", token);
-    setUser({ loggedIn: true });
+    localStorage.setItem("customerId", customerId);
+
+    setUser({
+      loggedIn: true,
+      customerId,
+    });
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("customerId");
     setUser(null);
   };
 
