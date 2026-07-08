@@ -70,6 +70,9 @@
   flex: 2;
 }
 
+.marker span {
+  flex: 1;
+}
 /* BRAND */
 .brand .logo {
   width: 150px;

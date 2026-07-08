@@ -59,7 +59,8 @@ const authLimiter = rateLimit({
 const allowedOrigins = [
   "http://localhost:5173",
   "https://captainschoice.in",
-  "https://wheat-shark-791228.hostingersite.com/",
+  "https://www.captainschoice.in",
+  "https://wheat-shark-791228.hostingersite.com",
 ];
 
 app.use(

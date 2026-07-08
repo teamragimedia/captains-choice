@@ -105,14 +105,18 @@ function FooterCTA() {
         <div className="footer-col">
           <h4>Get in Touch</h4>
           <ul>
-            <li>
-              <FaEnvelope /> hello@captainschoice.in
+            <li class="marker">
+              <FaEnvelope /> Eightcap1986@gmail.com
             </li>
-            <li>
-              <FaPhoneAlt /> +91 808 080 8080
+            <li class="marker">
+              <FaPhoneAlt /> +91 7899370617
             </li>
-            <li>
-              <FaMapMarkerAlt /> Bengaluru, India
+            <li className="marker">
+              <FaMapMarkerAlt />
+              <span>
+                1st Floor, No. 273/30, 234/249/281, Y.V. Annaiah Road,
+                Yelachenahalli, JP Nagar, Bengaluru - 560078
+              </span>
             </li>
           </ul>
         </div>

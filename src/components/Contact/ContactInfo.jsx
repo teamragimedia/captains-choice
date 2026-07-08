@@ -11,7 +11,7 @@ const contactData = [
   {
     icon: <FaPhoneAlt />,
     title: "Call Us",
-    text1: "+91 98765 43210",
+    text1: "+91 78993 70617",
     text2: "Mon - Sat | 9:00 AM - 7:00 PM",
   },
   {
@@ -23,7 +23,8 @@ const contactData = [
   {
     icon: <FaMapMarkerAlt />,
     title: "Visit Us",
-    text1: "Captain's Choice",
+    text1:
+      "Captain's Choice 1st floor,No 273 30, 234 249 281 Y.V Annaiah Road, Yelachenahalli, JP Nagar Bengaluru 560078",
     text2: "Bangalore, Karnataka",
   },
   {

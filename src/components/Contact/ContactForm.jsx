@@ -81,9 +81,8 @@ const ContactForm = () => {
               <div className="office-item">
                 <h4>Head Office</h4>
                 <p>
-                  Captain's Choice
-                  <br />
-                  Bangalore, Karnataka
+                  1st floor,No 273 30, 234 249 281 Y.V Annaiah Road,
+                  Yelachenahalli, JP Nagar Bengaluru 560078
                 </p>
               </div>
 
@@ -94,7 +93,7 @@ const ContactForm = () => {
 
               <div className="office-item">
                 <h4>Phone</h4>
-                <p>+91 98765 43210</p>
+                <p>+91 78993 70617</p>
               </div>
             </div>
           </div>
