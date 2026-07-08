@@ -12,7 +12,7 @@ function AccessibilityStatement() {
         disabilities.
       </p>
 
-      <p className="last-updated">Last Updated: June 2026</p>
+      <p className="last-updated">Last Updated: July 2026</p>
 
       <section>
         <h2>1. Our Commitment</h2>
@@ -85,9 +85,19 @@ function AccessibilityStatement() {
         <div className="contact-box">
           <h3>Captain's Choice</h3>
           <p>India's Trusted B2B Food Supply Platform</p>
-          <p>📞 +91 808 080 8080</p>
-          <p>📍 Bengaluru, Karnataka, India</p>
-          <p>📧 hello@captainschoice.in</p>
+          <p>
+            <strong>Phone:</strong> +91 7899370617
+          </p>
+          <p>
+            <strong>Address:</strong>
+            <br />
+            1st floor,No 273 30, 234 249 281
+            <br />
+            Y.V Annaiah Road, Yelachenahalli,
+            <br />
+            JP Nagar Bengaluru 560078
+          </p>
+          <p>📧 Eightcap1986@gmail.com</p>
         </div>
       </section>
     </div>

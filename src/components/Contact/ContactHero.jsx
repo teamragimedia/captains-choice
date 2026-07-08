@@ -40,7 +40,7 @@ const ContactHero = () => {
               </a>
 
               <a
-                href="mailto:support@captainschoice.in"
+                href="mailto:Eightcap1986@gmail.com"
                 className="btn-secondary"
               >
                 <FaEnvelope />

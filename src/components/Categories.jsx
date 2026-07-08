@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import API from "../api";
 
@@ -35,6 +36,7 @@ const item = {
 
 function Categories() {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     API.get("/categories/active")
@@ -80,6 +82,9 @@ function Categories() {
                 style={{
                   background: cat.color,
                 }}
+                onClick={() =>
+                  navigate(`/shop?category=${encodeURIComponent(cat.name)}`)
+                }
               >
                 <div className="categories-icon">{cat.icon}</div>
 

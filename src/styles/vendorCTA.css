@@ -7,6 +7,13 @@
   background: #f5f6f8;
 }
 
+@media (max-width: 780px) {
+  .vendor-section {
+    padding: 30px;
+    background: #f5f6f8;
+  }
+}
+
 /* CARD CONTAINER */
 .vendor-container {
   max-width: 1730px;

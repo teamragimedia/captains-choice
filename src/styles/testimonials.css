@@ -1,173 +1,239 @@
-/* =========================
-   SECTION
-========================= */
-.testimonials {
-  padding: 100px 40px;
+/* ======================================
+   CAPTAIN'S CHOICE TESTIMONIALS
+====================================== */
+
+.cc-testimonials-section {
+  padding: 120px 0;
   background: #f6f9fe;
+  overflow: hidden;
+  position: relative;
 }
 
-/* =========================
-   MAIN LAYOUT
-========================= */
-.testimonials-wrapper {
+.cc-testimonials-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
   display: flex;
-  align-items: flex-start; /* ✅ FIX */
+  align-items: center;
   gap: 60px;
 }
 
-/* =========================
-   LEFT SIDE (FIXED)
-========================= */
-.left {
-  flex: 0.3 0 350px; /* prevents shrinking */
+/* ======================================
+   LEFT CONTENT
+====================================== */
+
+.cc-testimonials-content {
+  flex: 0 0 350px;
 }
 
-.left h2 {
-  font-size: 36px;
+.cc-testimonials-content h2 {
+  font-size: 42px;
+  line-height: 1.1;
   font-weight: 700;
   color: #1d3b8b;
-  margin-bottom: 12px;
-  font-weight: bold;
+  margin-bottom: 16px;
 }
 
-.left p {
-  font-size: 15px;
+.cc-testimonials-content p {
+  font-size: 16px;
+  line-height: 1.7;
   color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-/* BUTTONS */
-.buttons {
+/* ======================================
+   NAVIGATION
+====================================== */
+
+.cc-testimonials-nav {
   display: flex;
   gap: 12px;
 }
 
-.buttons button {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+.cc-testimonials-nav button {
+  width: 52px;
+  height: 52px;
   border: none;
+  border-radius: 50%;
   background: #1d3b8b;
-  color: white;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
-/* =========================
-   RIGHT CAROUSEL
-========================= */
-.right {
+.cc-testimonials-nav button:hover {
+  transform: translateY(-3px);
+}
+
+.cc-testimonials-nav button svg {
+  font-size: 14px;
+}
+
+/* ======================================
+   SLIDER
+====================================== */
+
+.cc-testimonials-slider {
   flex: 1;
   overflow: hidden;
-  margin-top: 10px; /* fine-tune alignment */
+  width: 100%;
 }
 
-/* TRACK */
-.track {
+.cc-testimonials-track {
   display: flex;
-  gap: 20px;
-  cursor: grab;
-  /* margin-top: 130px; */
+  gap: 24px;
+  will-change: transform;
 }
 
-/* =========================
+/* ======================================
    CARD
-========================= */
-.card {
-  flex: 0 0 400px; /* fixed width */
-  height: 400px;
+====================================== */
+
+.cc-testimonial-card {
+  flex: 0 0 calc(50% - 12px);
   background: #ffffff;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  padding: 35px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+  min-height: 320px;
 }
 
-/* IMAGE */
-.card img {
-  width: 100px;
-  height: 100px;
+.cc-testimonial-card img {
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  margin-bottom: 15px;
-  object-fit: contain !important;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 20px;
 }
 
-/* NAME */
-.card h3 {
-  font-size: 20px;
+.cc-testimonial-card h3 {
+  font-size: 22px;
   color: #1d3b8b;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
-/* TEXT */
-.card p {
-  font-size: 14px;
+.cc-testimonial-card p {
   color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 10px;
+  line-height: 1.8;
+  font-size: 15px;
+  margin-bottom: 20px;
 }
 
-/* STARS */
-.stars {
+.cc-testimonial-stars {
   display: flex;
-  gap: 4px;
+  gap: 5px;
 }
 
-.stars svg {
+.cc-testimonial-stars svg {
   color: #f59e0b;
 }
 
-/* =========================
+/* ======================================
    TABLET
-========================= */
-@media (max-width: 992px) {
-  .testimonials-wrapper {
+====================================== */
+
+@media (max-width: 991px) {
+  .cc-testimonials-container {
     flex-direction: column;
     text-align: center;
+    gap: 40px;
+    padding: 0 24px;
   }
 
-  .left {
+  .cc-testimonials-content {
     flex: unset;
-    max-width: 100%;
+    width: 100%;
+    max-width: 700px;
   }
 
-  .buttons {
+  .cc-testimonials-nav {
     justify-content: center;
   }
 
-  .card {
-    flex: 0 0 80%;
+  .cc-testimonial-card {
+    flex: 0 0 100%;
+  }
+
+  .cc-testimonials-track {
+    gap: 0;
   }
 }
 
-/* =========================
+/* ======================================
    MOBILE
-========================= */
-@media (max-width: 600px) {
-  .testimonials {
-    padding: 70px 20px;
+====================================== */
+
+@media (max-width: 768px) {
+  .cc-testimonials-section {
+    padding: 80px 0;
   }
 
-  .left h2 {
-    font-size: 24px;
+  .cc-testimonials-container {
+    padding: 0 16px;
   }
 
-  .left p {
+  .cc-testimonials-content h2 {
+    font-size: 30px;
+  }
+
+  .cc-testimonials-content p {
     font-size: 14px;
   }
 
-  .card {
-    flex: 0 0 100%;
-    padding: 20px;
+  .cc-testimonials-nav button {
+    width: 46px;
+    height: 46px;
   }
 
-  .card h3 {
+  .cc-testimonial-card {
+    width: 100%;
+    flex: 0 0 100%;
+    padding: 24px;
+    min-height: auto;
+    border-radius: 20px;
+  }
+
+  .cc-testimonial-card img {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 16px;
+  }
+
+  .cc-testimonial-card h3 {
     font-size: 18px;
   }
 
-  .card p {
-    font-size: 13px;
+  .cc-testimonial-card p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .cc-testimonial-stars {
+    justify-content: center;
+  }
+}
+
+/* ======================================
+   SMALL MOBILE
+====================================== */
+
+@media (max-width: 480px) {
+  .cc-testimonials-content h2 {
+    font-size: 26px;
+  }
+
+  .cc-testimonial-card {
+    padding: 20px;
+  }
+
+  .cc-testimonial-card img {
+    width: 55px;
+    height: 55px;
   }
 }

@@ -89,7 +89,7 @@ const ContactForm = () => {
 
               <div className="office-item">
                 <h4>Email</h4>
-                <p>support@captainschoice.in</p>
+                <p>Eightcap1986@gmail.com</p>
               </div>
 
               <div className="office-item">

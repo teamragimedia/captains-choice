@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 import "../styles/testimonials.css";
 
-// 👉 Replace with your images
 import user1 from "../assets/user1.png";
 import user2 from "../assets/user2.png";
 import user3 from "../assets/user3.png";
@@ -25,68 +24,87 @@ const data = [
     text: "Reliable sourcing and excellent service. Highly recommended for restaurants.",
   },
   {
-    name: "Amit Verma",
+    name: "Rahul Singh",
     image: user1,
-    text: "Reliable sourcing and excellent service. Highly recommended for restaurants.",
+    text: "Excellent sourcing and customer support. Highly recommended.",
   },
 ];
 
-const CARD_WIDTH = 340; // 320 + gap
-
 function Testimonials() {
   const [index, setIndex] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(2);
+
+  useEffect(() => {
+    const updateView = () => {
+      if (window.innerWidth < 768) {
+        setCardsPerView(1);
+      } else if (window.innerWidth < 1200) {
+        setCardsPerView(2);
+      } else {
+        setCardsPerView(2);
+      }
+    };
+
+    updateView();
+    window.addEventListener("resize", updateView);
+
+    return () => window.removeEventListener("resize", updateView);
+  }, []);
+
+  const maxIndex = Math.max(0, data.length - cardsPerView);
 
   const next = () => {
-    if (index < data.length - 1) setIndex(index + 1);
+    setIndex((prev) => Math.min(prev + 1, maxIndex));
   };
 
   const prev = () => {
-    if (index > 0) setIndex(index - 1);
+    setIndex((prev) => Math.max(prev - 1, 0));
   };
 
   return (
-    <section className="testimonials">
-      <div className="container testimonials-wrapper">
-        {/* LEFT */}
-        <div className="left">
+    <section className="cc-testimonials-section">
+      <div className="cc-testimonials-container">
+        <div className="cc-testimonials-content">
           <h2>Trusted by Industry Leaders</h2>
+
           <p>
             Hear from chefs and restaurant owners who’ve transformed their
-            operations with Captain’s Choice
+            operations with Captain's Choice.
           </p>
 
-          <div className="buttons">
+          <div className="cc-testimonials-nav">
             <button onClick={prev}>
               <FaChevronLeft />
             </button>
+
             <button onClick={next}>
               <FaChevronRight />
             </button>
           </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="right">
+        <div className="cc-testimonials-slider">
           <motion.div
-            className="track"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            onDragEnd={(e, info) => {
-              if (info.offset.x < -80 && index < data.length - 1) next();
-              if (info.offset.x > 80 && index > 0) prev();
+            className="cc-testimonials-track"
+            animate={{
+              x: `-${index * (100 / cardsPerView)}%`,
             }}
-            animate={{ x: -index * CARD_WIDTH }}
-            transition={{ type: "spring", stiffness: 120 }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             {data.map((item, i) => (
-              <div className="card" key={i}>
+              <div className="cc-testimonial-card" key={i}>
                 <img src={item.image} alt={item.name} />
+
                 <h3>{item.name}</h3>
+
                 <p>{item.text}</p>
 
-                <div className="stars">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} />
+                <div className="cc-testimonial-stars">
+                  {[...Array(5)].map((_, idx) => (
+                    <FaStar key={idx} />
                   ))}
                 </div>
               </div>

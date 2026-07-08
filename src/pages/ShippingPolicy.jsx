@@ -8,175 +8,320 @@ function ShippingPolicy() {
 
       <p className="policy-intro">
         At Captain&apos;s Choice, we are committed to delivering fresh,
-        high-quality products quickly, safely, and efficiently. This Shipping
-        Policy explains our order processing, delivery timelines, shipping
-        practices, and customer responsibilities.
+        high-quality food products safely and on time. This Shipping Policy
+        explains how orders are processed, shipped, delivered, and handled in
+        case of delays or delivery-related issues.
       </p>
 
-      <p className="last-updated">Last Updated: June 2026</p>
+      <p className="last-updated">Last Updated: July 2026</p>
+
+      {/* Shipping Coverage */}
 
       <section className="policy-section">
         <h2>1. Shipping Coverage</h2>
 
         <p>
-          Captain&apos;s Choice currently delivers across selected cities and
-          serviceable regions in India through our logistics network and trusted
-          delivery partners.
+          Captain&apos;s Choice currently delivers across serviceable locations
+          within India.
         </p>
 
         <ul>
           <li>
-            Delivery availability depends on your location and service area.
+            Delivery availability depends on the customer's PIN code and service
+            area.
           </li>
+
+          <li>Some remote or restricted locations may not be serviceable.</li>
+
           <li>
-            Certain remote or restricted locations may not be eligible for
-            delivery.
-          </li>
-          <li>
-            If a location is not serviceable, prepaid amounts (if any) will be
-            refunded.
+            If an order cannot be delivered due to service limitations, any
+            prepaid amount collected will be refunded to the original payment
+            method.
           </li>
         </ul>
       </section>
 
+      {/* Processing */}
+
       <section className="policy-section">
-        <h2>2. Order Processing Time</h2>
+        <h2>2. Order Processing</h2>
 
         <p>
-          Orders are generally processed within 1–2 business days after order
-          confirmation.
+          Orders are processed only after successful payment authorization for
+          prepaid orders or confirmation of eligible Cash on Delivery orders.
         </p>
 
         <ul>
+          <li>Orders are processed within 24–48 business hours.</li>
+
           <li>
-            Orders placed on weekends or public holidays may be processed on the
-            next working day.
+            Orders received on Sundays or public holidays will be processed on
+            the next working day.
           </li>
+
           <li>
-            Bulk or special procurement orders may require additional processing
+            Large quantity or bulk orders may require additional processing
             time.
           </li>
-          <li>
-            Customers may receive order updates through email, SMS, or phone
-            communication.
-          </li>
         </ul>
       </section>
 
+      {/* Dispatch */}
+
       <section className="policy-section">
-        <h2>3. Estimated Delivery Time</h2>
+        <h2>3. Dispatch Timeline</h2>
 
         <p>
-          Delivery timelines vary depending on product availability, order size,
-          and delivery location.
-        </p>
-
-        <ul>
-          <li>Metro Cities: 1–3 business days</li>
-          <li>Major Cities: 2–5 business days</li>
-          <li>Other Serviceable Areas: 3–7 business days</li>
-        </ul>
-
-        <p>
-          Delivery schedules are estimates only and may be affected by weather
-          conditions, traffic, public holidays, operational disruptions, or
-          other unforeseen circumstances.
+          Once an order has been processed, it is dispatched within 24–48
+          business hours through our authorized logistics partners.
         </p>
       </section>
 
-      <section className="policy-section">
-        <h2>4. Shipping Charges</h2>
+      {/* Delivery */}
 
-        <p>Shipping charges may vary depending on:</p>
+      <section className="policy-section">
+        <h2>4. Estimated Delivery Time</h2>
+
+        <p>
+          Delivery timelines depend on your location and courier availability.
+        </p>
 
         <ul>
-          <li>Order value</li>
+          <li>Metro Cities: 1–3 Business Days</li>
+
+          <li>Major Cities: 2–5 Business Days</li>
+
+          <li>Other Serviceable Areas: 3–7 Business Days</li>
+        </ul>
+
+        <p>
+          These are estimated delivery timelines and may vary depending on
+          weather conditions, courier operations, natural disasters, strikes,
+          government restrictions, festivals, or other unforeseen circumstances.
+        </p>
+      </section>
+
+      {/* Shipping Charges */}
+
+      <section className="policy-section">
+        <h2>5. Shipping Charges</h2>
+
+        <p>Shipping charges, if applicable, are calculated based on:</p>
+
+        <ul>
           <li>Delivery location</li>
-          <li>Weight and volume of products</li>
-          <li>Promotional offers and campaigns</li>
+
+          <li>Order value</li>
+
+          <li>Product weight or volume</li>
+
+          <li>Running promotional offers</li>
         </ul>
 
         <p>
-          Any applicable delivery charges will be displayed during checkout
+          The applicable shipping charge will be displayed during checkout
           before payment confirmation.
         </p>
       </section>
 
+      {/* Courier */}
+
       <section className="policy-section">
-        <h2>5. Order Tracking</h2>
+        <h2>6. Shipping Partners</h2>
 
         <p>
-          Customers may receive tracking information or delivery updates via
-          email, SMS, phone call, or WhatsApp where applicable. If you have
-          questions regarding your shipment status, our customer support team
-          will be happy to assist.
+          Orders are shipped through trusted logistics and courier partners
+          depending on service availability. Courier partners may include
+          Delhivery, Blue Dart, DTDC, XpressBees, India Post, Shiprocket, or
+          other authorized logistics providers.
         </p>
       </section>
 
+      {/* Tracking */}
+
       <section className="policy-section">
-        <h2>6. Delivery Attempts</h2>
+        <h2>7. Order Tracking</h2>
+
+        <p>
+          Once your order has been dispatched, tracking information will be
+          shared via Email, SMS, WhatsApp, or through your registered account,
+          wherever applicable.
+        </p>
+
+        <p>
+          Customers may contact our support team if shipment tracking is not
+          available or if there are delivery-related concerns.
+        </p>
+      </section>
+
+      {/* Delivery Attempts */}
+
+      <section className="policy-section">
+        <h2>8. Delivery Attempts</h2>
 
         <ul>
           <li>
-            Our delivery team may attempt delivery more than once when feasible.
+            Courier partners may attempt delivery more than once depending on
+            their service policy.
           </li>
+
           <li>
-            Customers are responsible for ensuring availability at the delivery
-            address.
+            Customers are requested to ensure someone is available to receive
+            the order.
           </li>
+
           <li>
-            Additional delivery charges may apply for repeated delivery
-            attempts.
+            Incorrect addresses, invalid contact details, or customer
+            unavailability may result in delayed or failed deliveries.
           </li>
+
           <li>
-            Captain&apos;s Choice is not responsible for failed deliveries
-            caused by incorrect addresses, inaccurate contact details, or
-            customer unavailability.
+            Additional shipping charges may apply for re-delivery wherever
+            applicable.
           </li>
         </ul>
       </section>
 
+      {/* Failed Delivery */}
+
       <section className="policy-section">
-        <h2>7. Damaged, Missing, or Incorrect Items</h2>
+        <h2>9. Failed Deliveries</h2>
 
         <p>
-          If your order arrives damaged, incomplete, or contains incorrect
-          products:
+          Orders may be returned to Captain&apos;s Choice if delivery cannot be
+          completed due to:
         </p>
 
         <ul>
-          <li>Notify us within 24 hours of delivery.</li>
-          <li>Provide your Order ID or Invoice Number.</li>
-          <li>Share photographs showing the issue wherever applicable.</li>
+          <li>Incorrect shipping address</li>
+
+          <li>Incorrect contact number</li>
+
+          <li>Customer unavailable after delivery attempts</li>
+
+          <li>Order refused at delivery</li>
         </ul>
 
         <p>
-          Our team will investigate and provide a suitable resolution, including
-          replacement, credit, or refund where applicable.
+          Refunds or re-shipping of returned orders will be handled according to
+          our Refund & Cancellation Policy.
         </p>
       </section>
 
+      {/* Damaged */}
+
       <section className="policy-section">
-        <h2>8. Delivery Restrictions</h2>
+        <h2>10. Damaged, Missing or Incorrect Products</h2>
 
         <p>
-          Certain products may have delivery restrictions based on freshness
-          requirements, storage conditions, local regulations, or service area
-          limitations. Captain&apos;s Choice reserves the right to restrict or
-          cancel orders that cannot be fulfilled safely or efficiently.
+          If your order is damaged, incomplete, or contains incorrect items,
+          please notify us within 24 hours of delivery.
+        </p>
+
+        <ul>
+          <li>Provide your Order ID.</li>
+
+          <li>Share photographs of the package and products.</li>
+
+          <li>
+            Our support team will investigate and provide an appropriate
+            resolution including replacement, store credit, or refund wherever
+            applicable.
+          </li>
+        </ul>
+      </section>
+
+      {/* Lost */}
+
+      <section className="policy-section">
+        <h2>11. Lost Shipments</h2>
+
+        <p>
+          If a shipment is confirmed as lost while in transit by the courier
+          partner, Captain&apos;s Choice will investigate the matter and, where
+          appropriate, provide a replacement or process a refund as per our
+          Refund Policy.
         </p>
       </section>
 
+      {/* Force Majeure */}
+
       <section className="policy-section">
-        <h2>9. Contact Information</h2>
+        <h2>12. Delays Beyond Our Control</h2>
+
+        <p>
+          Delivery timelines may be affected by circumstances beyond our
+          reasonable control including:
+        </p>
+
+        <ul>
+          <li>Heavy rainfall</li>
+
+          <li>Floods</li>
+
+          <li>Natural disasters</li>
+
+          <li>Government restrictions</li>
+
+          <li>Public holidays</li>
+
+          <li>Transport disruptions</li>
+
+          <li>Labour strikes</li>
+        </ul>
+
+        <p>
+          Captain&apos;s Choice shall not be held responsible for delays arising
+          from such events.
+        </p>
+      </section>
+
+      {/* International */}
+
+      <section className="policy-section">
+        <h2>13. International Shipping</h2>
+
+        <p>
+          Captain&apos;s Choice currently delivers only within India.
+          International shipping is not available at this time.
+        </p>
+      </section>
+
+      {/* Contact */}
+
+      <section className="policy-section">
+        <h2>14. Contact Information</h2>
 
         <div className="contact-box">
           <h3>Captain&apos;s Choice</h3>
+
           <p>India&apos;s Trusted B2B Food Supply Platform</p>
 
-          <p>📞 +91 808 080 8080</p>
-          <p>📍 Bengaluru, Karnataka, India</p>
-          <p>📧 hello@captainschoice.in</p>
+          <p>
+            <strong>Address:</strong>
+            <br />
+            1st floor,No 273 30, 234 249 281
+            <br />
+            Y.V Annaiah Road, Yelachenahalli,
+            <br />
+            JP Nagar Bengaluru 560078
+          </p>
+
+          <p>
+            <strong>Phone:</strong> +91 7899370617
+          </p>
+
+          <p>
+            <strong>Email:</strong> Eightcap1986@gmail.com
+          </p>
+
+          <p>
+            <strong>Customer Support:</strong>
+            <br />
+            Monday – Saturday
+            <br />
+            9:00 AM – 6:00 PM
+          </p>
         </div>
       </section>
     </div>

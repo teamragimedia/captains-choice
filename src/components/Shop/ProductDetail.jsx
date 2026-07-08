@@ -54,6 +54,10 @@ function ProductDetail() {
 
     console.log("token:", token);
     console.log("customerId:", customerId);
+    console.log({
+      Authorization: `Bearer ${token}`,
+      customerid: customerId,
+    });
 
     // NOT LOGGED IN
     if (!token || !customerId) {

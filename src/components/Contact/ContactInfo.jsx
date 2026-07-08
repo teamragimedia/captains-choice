@@ -17,7 +17,7 @@ const contactData = [
   {
     icon: <FaEnvelope />,
     title: "Email Us",
-    text1: "support@captainschoice.in",
+    text1: "Eightcap1986@gmail.com",
     text2: "sales@captainschoice.in",
   },
   {

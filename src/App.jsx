@@ -15,6 +15,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import ShippingPolicy from "./pages/ShippingPolicy";
 import AccessibilityStatement from "./pages/AccessibilityStatement";
+import CancellationPolicy from "./pages/CancellationPolicy";
 
 // Components
 import HeroSlider from "./components/HeroSlider";
@@ -189,6 +190,14 @@ function App() {
           element={
             <MainLayout openLogin={() => setShowLogin(true)}>
               <ShippingPolicy />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/cancellation-policy"
+          element={
+            <MainLayout openLogin={() => setShowLogin(true)}>
+              <CancellationPolicy />
             </MainLayout>
           }
         />

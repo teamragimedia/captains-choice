@@ -10,4 +10,9 @@ const db = mysql.createPool({
   connectionLimit: 10,
 });
 
+console.log("MYSQL CONFIG", {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+});
+
 module.exports = db;

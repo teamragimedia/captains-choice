@@ -93,6 +93,9 @@ function FooterCTA() {
               <Link to="/shipping-policy">Shipping Policy</Link>
             </li>
             <li>
+              <Link to="/cancellation-policy">Cancellation Policy</Link>
+            </li>
+            <li>
               <Link to="/accessibility-statement">Accessibility Statement</Link>
             </li>
           </ul>

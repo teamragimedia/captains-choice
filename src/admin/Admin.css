@@ -1832,7 +1832,7 @@
 .submenu-active {
   background: linear-gradient(135deg, #2563eb, #3b82f6);
 
-  color: white !important;
+  color: white;
 
   box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
 }

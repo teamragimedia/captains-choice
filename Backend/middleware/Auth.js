@@ -2,8 +2,9 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
   try {
-    // get token from frontend
     const authHeader = req.headers.authorization;
+
+    console.log("AUTH HEADER:", authHeader);
 
     if (!authHeader) {
       return res.status(401).json({
@@ -11,8 +12,10 @@ module.exports = (req, res, next) => {
       });
     }
 
-    // Bearer token_here
     const token = authHeader.split(" ")[1];
+
+    console.log("TOKEN:", token);
+    console.log("JWT SECRET:", process.env.JWT_CUSTOMER_SECRET);
 
     if (!token) {
       return res.status(401).json({
@@ -20,7 +23,6 @@ module.exports = (req, res, next) => {
       });
     }
 
-    // verify token
     const decoded = jwt.verify(token, process.env.JWT_CUSTOMER_SECRET);
 
     console.log("DECODED USER:", decoded);
@@ -32,6 +34,8 @@ module.exports = (req, res, next) => {
 
     next();
   } catch (err) {
+    console.log("JWT ERROR:", err);
+
     return res.status(401).json({
       message: "Invalid Token",
     });

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./config/db");
@@ -6,9 +7,8 @@ const jwt = require("jsonwebtoken");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
-require("dotenv").config();
-
 console.log("=== SERVER STARTING ===");
+console.log("DB_PORT =", process.env.DB_PORT);
 console.log("PORT =", process.env.PORT);
 console.log("DB_HOST =", process.env.DB_HOST);
 console.log("DB_NAME =", process.env.DB_NAME);
@@ -56,9 +56,21 @@ const authLimiter = rateLimit({
 /* ================= MIDDLEWARE ================= */
 
 // app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://captainschoice.in",
+  "https://wheat-shark-791228.hostingersite.com/",
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
@@ -115,6 +127,7 @@ const reportsRoutes = require("./routes/reportsRoutes");
 const gstReportRoutes = require("./routes/gstReportRoutes");
 const purchaseRoutes = require("./routes/purchaseRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
+const exportRoutes = require("./routes/exportRoutes");
 
 /* ================= STATIC ================= */
 
@@ -160,6 +173,7 @@ app.use("/api/reports", reportsRoutes);
 app.use("/api/gst-reports", gstReportRoutes);
 app.use("/api/purchases", purchaseRoutes);
 app.use("/api/suppliers", supplierRoutes);
+app.use("/api/export", exportRoutes);
 
 app.use(express.static(path.join(__dirname, "../dist")));
 

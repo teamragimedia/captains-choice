@@ -156,19 +156,53 @@
 @media (max-width: 600px) {
   .footer-cta {
     padding: 60px 20px 0;
+    text-align: left;
   }
 
   .cta-top h2 {
     font-size: 24px;
+    text-align: left;
+  }
+
+  .cta-top p {
+    text-align: left;
   }
 
   .footer-content {
     flex-direction: column;
-    text-align: center;
+    text-align: left;
+    align-items: flex-start;
   }
 
   .footer-col {
     width: 100%;
+    text-align: left;
+  }
+
+  .footer-col h4 {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+
+  .footer-col ul {
+    text-align: left;
+  }
+
+  .footer-col ul li {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .brand {
+    text-align: left;
+  }
+
+  .badges {
+    justify-content: flex-start;
+  }
+
+  .brand p {
+    text-align: left;
   }
 
   .footer-image img {
