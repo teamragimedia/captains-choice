@@ -4,160 +4,104 @@ import "../styles/PolicyPages.css";
 function RefundPolicy() {
   return (
     <div className="policy-page">
-      <h1>Refund, Return & Cancellation Policy</h1>
+      <h1>Refund and Cancellation Policy</h1>
 
-      <p className="policy-intro">
-        At Captain&apos;s Choice, we are committed to delivering fresh,
-        high-quality products and providing a transparent shopping experience.
-        This policy explains our return, replacement, refund and cancellation
-        procedures.
+      <p>
+        This Refund and Cancellation Policy outlines how you can cancel or seek
+        a refund for a product/service that you have purchased through the
+        Platform. Under this policy:
       </p>
 
-      <p className="last-updated">Last Updated: July 2026</p>
-
       <section className="policy-section">
-        <h2>1. Return Eligibility</h2>
+        <h2>Cancellation Policy</h2>
+
         <p>
-          Due to the nature of food and perishable products, returns are
-          generally not accepted after delivery except in the following cases:
+          Cancellations will only be considered if the request is made within
+          <strong> 3 days </strong>
+          of placing the order. However, cancellation requests may not be
+          entertained if the orders have been communicated to the sellers or
+          merchants listed on the Platform and they have initiated the shipping
+          process, or if the product is already out for delivery.
         </p>
-        <ul>
-          <li>Damaged products.</li>
-          <li>Incorrect products delivered.</li>
-          <li>Missing items.</li>
-          <li>Expired or verified quality issues.</li>
-        </ul>
+
         <p>
-          Issues must be reported within <strong>24 hours</strong> of delivery
-          with photographs and Order ID.
+          In such cases, you may choose to reject the product at the time of
+          delivery.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>2. Conditions for Approval</h2>
-        <ul>
-          <li>Request submitted within 24 hours.</li>
-          <li>Original packaging available wherever applicable.</li>
-          <li>Supporting photographs provided.</li>
-          <li>Issue verified by our Quality Team.</li>
-        </ul>
-      </section>
+        <h2>Perishable Products</h2>
 
-      <section className="policy-section">
-        <h2>3. Non-Returnable Products</h2>
-        <ul>
-          <li>Opened or consumed food products.</li>
-          <li>Fresh fruits and vegetables.</li>
-          <li>Dairy and chilled products.</li>
-          <li>Frozen products.</li>
-          <li>Products marked non-returnable.</li>
-        </ul>
-      </section>
-
-      <section className="policy-section">
-        <h2>4. Refund Process</h2>
-        <p>Approved refunds are issued only to the original payment method.</p>
-        <ul>
-          <li>UPI: 2–5 business days.</li>
-          <li>Debit/Credit Cards: 5–7 business days.</li>
-          <li>Net Banking: 5–7 business days.</li>
-          <li>Bank processing timelines may vary.</li>
-        </ul>
-      </section>
-
-      <section className="policy-section">
-        <h2>5. Replacement Policy</h2>
         <p>
-          Depending on product availability and investigation results we may:
+          7899370617 does not accept cancellation requests for perishable items
+          such as flowers, eatables and similar products.
         </p>
-        <ul>
-          <li>Replace the product.</li>
-          <li>Issue store credit.</li>
-          <li>Issue a partial refund.</li>
-          <li>Issue a full refund.</li>
-        </ul>
-      </section>
 
-      <section className="policy-section">
-        <h2>6. Customer Cancellation</h2>
         <p>
-          Orders may be cancelled before processing or dispatch. Once packed,
-          shipped or handed over to the courier partner, cancellation may not be
-          possible.
+          However, a refund or replacement may be considered if the customer is
+          able to establish that the quality of the delivered product is not
+          satisfactory.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>7. Seller Cancellation</h2>
-        <p>Captain&apos;s Choice may cancel an order due to:</p>
-        <ul>
-          <li>Product unavailable.</li>
-          <li>Pricing error.</li>
-          <li>Payment verification failure.</li>
-          <li>Fraud detection.</li>
-          <li>Non-serviceable delivery location.</li>
-        </ul>
+        <h2>Damaged or Defective Products</h2>
+
         <p>
-          Any prepaid amount will be refunded to the original payment method.
+          If you receive a damaged or defective product, please report the issue
+          to our customer service team.
+        </p>
+
+        <p>
+          The request will be processed after the seller or merchant listed on
+          the Platform has inspected and verified the issue.
+        </p>
+
+        <p>
+          Such complaints must be reported within
+          <strong> 3 days </strong>
+          from the date of receiving the product.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>8. Refund Not Applicable</h2>
-        <ul>
-          <li>Products consumed or used.</li>
-          <li>Requests made after 24 hours.</li>
-          <li>Taste preferences.</li>
-          <li>Incorrect address provided by customer.</li>
-          <li>Customer unavailable for delivery.</li>
-          <li>False or fraudulent claims.</li>
-        </ul>
-      </section>
+        <h2>Incorrect or Unsatisfactory Products</h2>
 
-      <section className="policy-section">
-        <h2>9. Quality Inspection</h2>
         <p>
-          Returned products are inspected by our quality team before approving
-          any refund, replacement or store credit.
+          If you believe that the product received is different from what was
+          shown on the Platform or does not meet your expectations, you must
+          notify our customer service team within
+          <strong> 3 days </strong>
+          of receiving the product.
+        </p>
+
+        <p>
+          After reviewing your complaint, our customer service team will take an
+          appropriate decision regarding replacement or refund, wherever
+          applicable.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>10. Delays Beyond Our Control</h2>
+        <h2>Manufacturer Warranty</h2>
+
         <p>
-          Refund processing may be delayed due to banking holidays, payment
-          gateway maintenance, natural disasters or other unforeseen events.
+          For products covered under a manufacturer's warranty, customers are
+          requested to contact the respective manufacturer directly regarding
+          warranty-related complaints and claims.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>11. Contact Us</h2>
-        <div className="contact-box">
-          <h3>Captain&apos;s Choice</h3>
-          <p>India&apos;s Trusted B2B Food Supply Platform</p>
-          <p>
-            <strong>Address:</strong>
-            <br />
-            1st floor,No 273 30, 234 249 281
-            <br />
-            Y.V Annaiah Road, Yelachenahalli,
-            <br />
-            JP Nagar Bengaluru 560078
-          </p>
-          <p>
-            <strong>Phone:</strong> +91 7899370617
-          </p>
-          <p>
-            <strong>Email:</strong> Eightcap1986@gmail.com
-          </p>
-          <p>
-            <strong>Support Hours:</strong>
-            <br />
-            Monday - Saturday
-            <br />
-            9:00 AM - 6:00 PM
-          </p>
-        </div>
+        <h2>Refund Processing</h2>
+
+        <p>
+          In cases where a refund is approved by 7899370617, the refund will be
+          processed within
+          <strong> 3 days </strong>
+          from the date of approval.
+        </p>
       </section>
     </div>
   );

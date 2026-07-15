@@ -14,7 +14,7 @@ import TermsConditions from "./pages/TermsConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import ShippingPolicy from "./pages/ShippingPolicy";
-import AccessibilityStatement from "./pages/AccessibilityStatement";
+import ReturnPolicy from "./pages/ReturnPolicy";
 import CancellationPolicy from "./pages/CancellationPolicy";
 
 // Components
@@ -203,10 +203,10 @@ function App() {
         />
 
         <Route
-          path="/accessibility-statement"
+          path="/return-policy"
           element={
             <MainLayout openLogin={() => setShowLogin(true)}>
-              <AccessibilityStatement />
+              <ReturnPolicy />
             </MainLayout>
           }
         />

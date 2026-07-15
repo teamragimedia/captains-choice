@@ -6,202 +6,262 @@ function PrivacyPolicy() {
     <div className="policy-page">
       <h1>Privacy Policy</h1>
 
-      <p className="policy-intro">
-        At Captain&apos;s Choice, we value your privacy and are committed to
-        protecting your personal information. This Privacy Policy explains how
-        we collect, use, and safeguard your data when you visit our website or
-        use our services.
+      <p>
+        <strong>Introduction</strong>
       </p>
 
-      <p className="last-updated">Last Updated: July 2026</p>
+      <p>
+        This Privacy Policy describes how 7899370617 and its affiliates
+        (collectively "7899370617", "we", "our", "us") collect, use, share,
+        protect or otherwise process your information/personal data through our
+        website https://captainschoice.in/ (hereinafter referred to as
+        "Platform"). Please note that you may be able to browse certain sections
+        of the Platform without registering with us. We do not offer any
+        product/service under this Platform outside India and your personal data
+        will primarily be stored and processed in India. By visiting this
+        Platform, providing your information or availing any product/service
+        offered on the Platform, you expressly agree to be bound by the terms
+        and conditions of this Privacy Policy, the Terms of Use and the
+        applicable service/product terms and conditions, and agree to be
+        governed by the laws of India including but not limited to the laws
+        applicable to data protection and privacy. If you do not agree, please
+        do not use or access our Platform.
+      </p>
 
       <section className="policy-section">
-        <h2>1. Information We Collect</h2>
+        <h2>Collection</h2>
 
         <p>
-          When you interact with Captain&apos;s Choice, we may collect the
-          following types of information:
+          We collect your personal data when you use our Platform, services or
+          otherwise interact with us during the course of our relationship and
+          related information provided from time to time. Some of the
+          information that we may collect includes but is not limited to
+          personal data or information provided to us during sign-up/registering
+          or using our Platform such as name, date of birth, address,
+          telephone/mobile number, email ID and/or any such information shared
+          as proof of identity or address.
         </p>
 
-        <h3>a. Personal Information</h3>
-
-        <ul>
-          <li>Name</li>
-          <li>Email Address</li>
-          <li>Phone Number</li>
-          <li>Business Name</li>
-          <li>Billing and Delivery Address</li>
-          <li>GST Information (where applicable)</li>
-          <li>Payment Information processed through secure gateways</li>
-        </ul>
-
-        <h3>b. Non-Personal Information</h3>
-
-        <ul>
-          <li>Browser type and version</li>
-          <li>Device and operating system information</li>
-          <li>IP address</li>
-          <li>Website usage statistics</li>
-          <li>Pages visited and session duration</li>
-          <li>Referral and traffic source information</li>
-        </ul>
-      </section>
-
-      <section className="policy-section">
-        <h2>2. How We Use Your Information</h2>
-
         <p>
-          The information we collect helps us provide better services and
-          improve your experience.
+          Some of the sensitive personal data may be collected with your
+          consent, such as your bank account or credit/debit card or other
+          payment instrument information or biometric information such as your
+          facial features or physiological information (to enable certain
+          optional Platform features), all in accordance with applicable laws.
         </p>
 
-        <ul>
-          <li>Process and fulfill orders efficiently</li>
-          <li>Manage deliveries and logistics</li>
-          <li>Provide customer support</li>
-          <li>Verify business accounts and registrations</li>
-          <li>Improve website functionality and user experience</li>
-          <li>Send order updates and service notifications</li>
-          <li>
-            Share promotional offers and marketing communications where consent
-            is provided
-          </li>
-          <li>Comply with legal and regulatory requirements</li>
-        </ul>
-
         <p>
-          Captain&apos;s Choice does not sell, rent, or trade your personal
-          information to third parties.
-        </p>
-      </section>
-
-      <section className="policy-section">
-        <h2>3. Sharing of Information</h2>
-
-        <p>
-          We may share information only when necessary to provide services or
-          comply with legal obligations.
+          You always have the option not to provide information by choosing not
+          to use a particular service or feature on the Platform.
         </p>
 
-        <ul>
-          <li>
-            <strong>Logistics & Delivery Partners</strong> – To deliver your
-            orders efficiently.
-          </li>
-
-          <li>
-            <strong>Payment Gateway Providers</strong> – To securely process
-            transactions.
-          </li>
-
-          <li>
-            <strong>Technology & Analytics Providers</strong> – To improve
-            platform performance and security.
-          </li>
-
-          <li>
-            <strong>Government or Legal Authorities</strong> – When required by
-            law or regulatory obligations.
-          </li>
-        </ul>
+        <p>
+          We may track your behaviour, preferences and other information that
+          you choose to provide on our Platform. This information is compiled
+          and analysed on an aggregated basis. We also collect information
+          relating to your transactions on our Platform and associated
+          third-party business partner platforms.
+        </p>
 
         <p>
-          All service providers are expected to maintain appropriate
-          confidentiality and data protection standards.
+          When a third-party business partner collects your personal data
+          directly, their privacy policy will apply. We are not responsible for
+          the privacy practices or policies of third-party partners, and we
+          encourage you to review them before sharing your information.
+        </p>
+
+        <p>
+          If you receive an email or phone call from anyone claiming to be
+          7899370617 requesting sensitive information such as debit/credit card
+          PINs, internet banking passwords or mobile banking passwords, do not
+          provide such information. If you have already disclosed such
+          information, please report it immediately to the appropriate law
+          enforcement agency.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>4. Cookies & Tracking Technologies</h2>
+        <h2>Usage</h2>
 
-        <p>Captain&apos;s Choice uses cookies and similar technologies to:</p>
+        <p>
+          We use your personal data to provide the services you request. Where
+          we use your personal data for marketing purposes, we provide you with
+          the option to opt out.
+        </p>
+
+        <p>We use your personal data to:</p>
 
         <ul>
-          <li>Improve website performance and functionality</li>
-          <li>Remember user preferences</li>
-          <li>Analyze visitor behavior and website traffic</li>
-          <li>Enhance browsing experience</li>
-          <li>Support security and fraud prevention measures</li>
+          <li>Provide requested services.</li>
+          <li>Assist sellers and business partners in fulfilling orders.</li>
+          <li>Enhance customer experience.</li>
+          <li>Resolve disputes and troubleshoot problems.</li>
+          <li>Inform you about products, services, offers and updates.</li>
+          <li>Customize your experience.</li>
+          <li>Detect and prevent fraud or criminal activity.</li>
+          <li>Enforce our Terms and Conditions.</li>
+          <li>Conduct research, analysis and surveys.</li>
+          <li>Carry out purposes disclosed at the time of data collection.</li>
         </ul>
 
         <p>
-          You may disable cookies through your browser settings. However,
-          certain website features may not function properly if cookies are
-          disabled.
+          You understand that your access to certain products or services may be
+          affected if required permissions are not granted.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>5. Data Security</h2>
+        <h2>Sharing</h2>
 
         <p>
-          We implement industry-standard technical and organizational safeguards
-          to protect your information from unauthorized access, misuse,
-          alteration, or disclosure. While we strive to maintain high security
-          standards, no online transmission or storage method can be guaranteed
-          to be completely secure.
+          We may share your personal data internally within our group entities,
+          affiliates and other corporate entities to provide products and
+          services to you.
         </p>
-      </section>
 
-      <section className="policy-section">
-        <h2>6. Your Privacy Rights</h2>
-
-        <p>Subject to applicable laws, you may have the right to:</p>
+        <p>We may also disclose your personal data to:</p>
 
         <ul>
-          <li>Access your personal information</li>
-          <li>Update or correct inaccurate information</li>
-          <li>Request deletion of personal data</li>
-          <li>Withdraw consent for marketing communications</li>
-          <li>Request information regarding how your data is used</li>
+          <li>Sellers and business partners.</li>
+          <li>Third-party service providers.</li>
+          <li>Logistics partners.</li>
+          <li>Payment service providers.</li>
+          <li>Reward program partners.</li>
+          <li>Government authorities and law enforcement agencies.</li>
         </ul>
 
         <p>
-          To exercise these rights, please contact us using the details provided
-          below.
+          Such disclosures may be necessary to provide our services, comply with
+          legal obligations, enforce our Terms, facilitate marketing activities,
+          or prevent fraud and illegal activities.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>7. Third-Party Links</h2>
+        <h2>Security Precautions</h2>
 
         <p>
-          Our website may contain links to third-party websites or services.
-          Captain&apos;s Choice is not responsible for the privacy practices,
-          security measures, or content of such external websites.
+          To protect your personal data from unauthorized access, disclosure,
+          misuse or loss, we adopt reasonable security practices and procedures.
+          Whenever your information is stored with us or you access your
+          account, we use appropriate security measures including secure
+          servers.
         </p>
-      </section>
-
-      <section className="policy-section">
-        <h2>8. Updates to this Policy</h2>
 
         <p>
-          We may update this Privacy Policy from time to time to reflect
-          operational, legal, or technological changes. Updates will be
-          published on this page with a revised effective date.
+          However, internet transmission is never completely secure. By using
+          the Platform, you acknowledge the inherent risks associated with
+          transmitting information over the internet. Users are responsible for
+          protecting their login credentials and passwords.
         </p>
       </section>
 
       <section className="policy-section">
-        <h2>9. Contact Information</h2>
+        <h2>Data Deletion and Retention</h2>
+
+        <p>
+          You may delete your account through your profile settings on the
+          Platform. You may also contact us using the details provided below for
+          assistance.
+        </p>
+
+        <p>
+          We may delay or refuse account deletion if there are pending
+          grievances, claims, shipments or legal obligations.
+        </p>
+
+        <p>
+          Once your account is deleted, you will lose access to your account and
+          associated information.
+        </p>
+
+        <p>
+          We retain personal data only as long as necessary for legal,
+          operational, fraud prevention, research or regulatory purposes.
+        </p>
+      </section>
+
+      <section className="policy-section">
+        <h2>Your Rights</h2>
+
+        <p>
+          You may access, rectify and update your personal information directly
+          through the functionalities provided on the Platform.
+        </p>
+      </section>
+
+      <section className="policy-section">
+        <h2>Consent</h2>
+
+        <p>
+          By visiting our Platform or providing your information, you consent to
+          the collection, storage, use, disclosure and processing of your
+          information in accordance with this Privacy Policy.
+        </p>
+
+        <p>
+          If you provide personal data relating to another person, you confirm
+          that you have the authority to do so.
+        </p>
+
+        <p>
+          You also consent to receiving communications through SMS, instant
+          messaging applications, phone calls and emails for purposes described
+          in this Privacy Policy.
+        </p>
+
+        <p>
+          You may withdraw your consent by writing to the Grievance Officer
+          using the contact details below with the subject:
+          <strong> "Withdrawal of consent for processing personal data"</strong>
+          .
+        </p>
+
+        <p>
+          We may verify your request before processing it. Withdrawal of consent
+          will not apply retrospectively and may affect our ability to provide
+          certain services.
+        </p>
+      </section>
+
+      <section className="policy-section">
+        <h2>Changes to this Privacy Policy</h2>
+
+        <p>
+          Please review this Privacy Policy periodically. We may update it from
+          time to time to reflect changes in our information practices or legal
+          requirements. Significant changes may be communicated as required
+          under applicable law.
+        </p>
+      </section>
+
+      <section className="policy-section">
+        <h2>Grievance Officer</h2>
 
         <div className="contact-box">
-          <h3>Captain&apos;s Choice</h3>
-          <p>India&apos;s Trusted B2B Food Supply Platform</p>
+          <p>
+            <strong>Officer Name:</strong> Santosh
+          </p>
 
           <p>
-            <strong>Phone:</strong> +91 7899370617
+            <strong>Designation:</strong> Manager
           </p>
+
           <p>
-            <strong>Address:</strong>
+            <strong>Company Address:</strong>
             <br />
-            1st floor,No 273 30, 234 249 281
-            <br />
-            Y.V Annaiah Road, Yelachenahalli,
-            <br />
-            JP Nagar Bengaluru 560078
+            EightCap Technologies Private Limited
           </p>
-          <p>📧 Eightcap1986@gmail.com</p>
+
+          <p>
+            <strong>Contact:</strong> 7899370617
+          </p>
+
+          <p>
+            <strong>Phone Support:</strong>
+            <br />
+            Monday - Friday (9:00 AM - 6:00 PM)
+          </p>
         </div>
       </section>
     </div>
