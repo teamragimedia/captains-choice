@@ -250,7 +250,7 @@ function PrivacyPolicy() {
           <p>
             <strong>Company Address:</strong>
             <br />
-            EightCap Technologies Private Limited
+            SQUADT Agritech LLP
           </p>
 
           <p>
