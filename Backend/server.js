@@ -56,6 +56,7 @@ const authLimiter = rateLimit({
 /* ================= MIDDLEWARE ================= */
 
 // app.use(cors());
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://captainschoice.in",
@@ -66,11 +67,13 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
+      // Requests without an Origin header can include server-to-server requests.
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+
+      console.error("CORS rejected origin:", origin);
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   }),
