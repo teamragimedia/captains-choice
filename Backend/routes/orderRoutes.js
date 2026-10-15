@@ -6,6 +6,8 @@ const db = require("../config/db");
 
 const { createOrder } = require("../controllers/orderController");
 
+const Auth = require("../middleware/Auth");
+
 // GET ORDERS
 
 router.get("/", async (req, res) => {
@@ -31,6 +33,6 @@ router.get("/", async (req, res) => {
 
 // CREATE ORDER
 
-router.post("/create", createOrder);
+router.post("/create", Auth, createOrder);
 
 module.exports = router;

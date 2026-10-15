@@ -75,6 +75,15 @@ app.use(
     credentials: true,
   }),
 );
+
+/* Razorpay webhook must receive the original raw body.
+   Register this BEFORE express.json(). */
+app.use(
+  "/api/payments/webhook",
+  express.raw({ type: "application/json", limit: "1mb" }),
+);
+
+/* Parse JSON for all other routes. */
 app.use(
   express.json({
     limit: "10mb",
@@ -129,6 +138,7 @@ const gstReportRoutes = require("./routes/gstReportRoutes");
 const purchaseRoutes = require("./routes/purchaseRoutes");
 const supplierRoutes = require("./routes/supplierRoutes");
 const exportRoutes = require("./routes/exportRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 /* ================= STATIC ================= */
 
@@ -175,6 +185,7 @@ app.use("/api/gst-reports", gstReportRoutes);
 app.use("/api/purchases", purchaseRoutes);
 app.use("/api/suppliers", supplierRoutes);
 app.use("/api/export", exportRoutes);
+app.use("/api/payments", paymentRoutes);
 
 app.use(express.static(path.join(__dirname, "../dist")));
 

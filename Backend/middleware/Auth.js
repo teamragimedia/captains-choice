@@ -3,19 +3,22 @@ const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
+    const secret = process.env.JWT_CUSTOMER_SECRET;
 
-    console.log("AUTH HEADER:", authHeader);
+    if (!secret) {
+      console.error("JWT customer secret is not configured.");
+      return res.status(500).json({
+        message: "Authentication configuration error",
+      });
+    }
 
-    if (!authHeader) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         message: "Login required",
       });
     }
 
-    const token = authHeader.split(" ")[1];
-
-    console.log("TOKEN:", token);
-    console.log("JWT SECRET:", process.env.JWT_CUSTOMER_SECRET);
+    const token = authHeader.slice(7).trim();
 
     if (!token) {
       return res.status(401).json({
@@ -23,21 +26,25 @@ module.exports = (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_CUSTOMER_SECRET);
+    const decoded = jwt.verify(token, secret);
 
-    console.log("DECODED USER:", decoded);
+    if (
+      !decoded.customerId ||
+      !Number.isInteger(Number(decoded.customerId)) ||
+      Number(decoded.customerId) <= 0
+    ) {
+      return res.status(401).json({
+        message: "Invalid customer token",
+      });
+    }
 
     req.user = decoded;
-    req.customerId = decoded.customerId;
-
-    console.log("SET CUSTOMER ID:", req.customerId);
+    req.customerId = Number(decoded.customerId);
 
     next();
   } catch (err) {
-    console.log("JWT ERROR:", err);
-
     return res.status(401).json({
-      message: "Invalid Token",
+      message: "Invalid or expired token",
     });
   }
 };

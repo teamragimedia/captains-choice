@@ -254,6 +254,7 @@ function PrivacyPolicy() {
           </p>
 
           <p>
+            
             <strong>Contact:</strong> 7899370617
           </p>
 

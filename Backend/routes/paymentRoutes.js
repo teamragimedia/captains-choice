@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  createPayment,
-  verifyPayment,
-  phonepeWebhook
-} = require("../controllers/paymentController");
+const Auth = require("../middleware/Auth");
+const { verifyPayment } = require("../controllers/paymentController");
 
-router.post("/create", createPayment);
+router.post("/verify", Auth, verifyPayment);
 
-router.get("/status/:transactionId", verifyPayment);
-
-router.post("/webhook", phonepeWebhook);
+// Register the webhook only after its handler is implemented.
+// Razorpay webhooks do not use customer JWT authentication.
 
 module.exports = router;
