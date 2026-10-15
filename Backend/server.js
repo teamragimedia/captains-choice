@@ -25,22 +25,7 @@ process.on("unhandledRejection", (err) => {
 
 const app = express();
 
-// app.use(
-//   helmet({
-//     crossOriginResourcePolicy: {
-//       policy: "cross-origin",
-//     },
-//   }),
-// );
 
-// app.use(
-//   rateLimit({
-//     windowMs: 15 * 60 * 1000,
-//     max: 200,
-//     standardHeaders: true,
-//     legacyHeaders: false,
-//   }),
-// );
 
 // OTP / Login protection
 const authLimiter = rateLimit({
