@@ -62,6 +62,7 @@ const allowedOrigins = [
   "https://captainschoice.in",
   "https://www.captainschoice.in",
   "https://wheat-shark-791228.hostingersite.com",
+  "https://blanchedalmond-toad-950794.hostingersite.com",
 ];
 
 app.use(
