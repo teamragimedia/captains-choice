@@ -1,204 +1,590 @@
-import { useEffect, useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
 import "../styles/CartPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BASE_URL from "../config";
 import API from "../api";
 
+const RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
+
+function loadRazorpayScript() {
+  if (window.Razorpay) return Promise.resolve(true);
+
+  return new Promise((resolve) => {
+    let script = document.querySelector(`script[src="${RAZORPAY_SCRIPT_URL}"]`);
+
+    if (script) {
+      if (script.dataset.loaded === "true" && window.Razorpay) {
+        resolve(true);
+        return;
+      }
+
+      script.addEventListener("load", () => resolve(Boolean(window.Razorpay)), {
+        once: true,
+      });
+
+      script.addEventListener("error", () => resolve(false), {
+        once: true,
+      });
+
+      return;
+    }
+
+    script = document.createElement("script");
+    script.src = RAZORPAY_SCRIPT_URL;
+    script.async = true;
+
+    script.onload = () => {
+      script.dataset.loaded = "true";
+      resolve(Boolean(window.Razorpay));
+    };
+
+    script.onerror = () => resolve(false);
+
+    document.body.appendChild(script);
+  });
+}
+
 function CartPage() {
+  const navigate = useNavigate();
+
   const [cart, setCart] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
   const [deliveryDate, setDeliveryDate] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
-
   const [notes, setNotes] = useState("");
 
   const [offerCode, setOfferCode] = useState("");
-
   const [discountPercent, setDiscountPercent] = useState(0);
-
   const [offerApplied, setOfferApplied] = useState(false);
 
-  useEffect(() => {
+  const [serverTotals, setServerTotals] = useState(null);
+  const [isLoadingTotals, setIsLoadingTotals] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
+
+  const getAuthConfig = useCallback(() => {
     const token = localStorage.getItem("token");
     const customerId = localStorage.getItem("customerId");
 
-    // User not logged in
+    return {
+      token,
+      customerId,
+      headers: {
+        Authorization: `Bearer ${token || ""}`,
+        customerid: customerId || "",
+      },
+    };
+  }, []);
+
+  // ---------------- CART ----------------
+
+  const fetchCart = useCallback(async () => {
+    const { token, customerId, headers } = getAuthConfig();
+
     if (!token || !customerId) {
       setCart([]);
+      return [];
+    }
+
+    try {
+      const response = await API.get("/cart", { headers });
+      const items = Array.isArray(response.data?.cart)
+        ? response.data.cart
+        : [];
+
+      setCart(items);
+      return items;
+    } catch (error) {
+      console.error(
+        "Unable to load cart:",
+        error.response?.data || error.message,
+      );
+      throw error;
+    }
+  }, [getAuthConfig]);
+
+  // Notify the navbar and other components that the cart changed.
+  const notifyCartUpdated = useCallback(() => {
+    window.dispatchEvent(new Event("cartUpdated"));
+  }, []);
+
+  // ---------------- SERVER TOTALS ----------------
+
+  const fetchOrderPreview = useCallback(
+    async (requestedOfferCode = "") => {
+      const { token, customerId, headers } = getAuthConfig();
+
+      if (!token || !customerId) {
+        setServerTotals(null);
+        return null;
+      }
+
+      setIsLoadingTotals(true);
+
+      try {
+        const response = await API.get("/orders/preview", {
+          params: { offerCode: requestedOfferCode },
+          headers,
+        });
+
+        if (!response.data?.success) {
+          throw new Error(
+            response.data?.message || "Unable to calculate order totals.",
+          );
+        }
+
+        const totals = response.data.totals || null;
+        setServerTotals(totals);
+        return totals;
+      } catch (error) {
+        console.error(
+          "Unable to preview order totals:",
+          error.response?.data || error.message,
+        );
+
+        setServerTotals(null);
+        throw error;
+      } finally {
+        setIsLoadingTotals(false);
+      }
+    },
+    [getAuthConfig],
+  );
+
+  // ---------------- ADDRESSES ----------------
+
+  const fetchAddresses = useCallback(async () => {
+    const { token, customerId, headers } = getAuthConfig();
+
+    if (!token || !customerId) {
       setAddresses([]);
+      setSelectedAddress(null);
       return;
     }
 
-    fetchCart();
+    try {
+      const response = await API.get("/addresses/my", { headers });
+      const addressList = Array.isArray(response.data) ? response.data : [];
+
+      setAddresses(addressList);
+
+      setSelectedAddress((currentAddress) => {
+        const currentStillExists = addressList.some(
+          (address) => String(address.id) === String(currentAddress),
+        );
+
+        if (currentStillExists) return currentAddress;
+
+        const primary = addressList.find(
+          (address) =>
+            address.is_primary === 1 ||
+            address.is_primary === true ||
+            address.is_primary === "1",
+        );
+
+        return primary?.id ?? addressList[0]?.id ?? null;
+      });
+    } catch (error) {
+      console.error(
+        "Unable to load addresses:",
+        error.response?.data || error.message,
+      );
+    }
+  }, [getAuthConfig]);
+
+  useEffect(() => {
+    const { token, customerId } = getAuthConfig();
+
+    if (!token || !customerId) {
+      setCart([]);
+      setAddresses([]);
+      setSelectedAddress(null);
+      setServerTotals(null);
+      return;
+    }
+
+    fetchCart().catch(() => {});
     fetchAddresses();
-  }, []);
+    fetchOrderPreview().catch(() => {});
+  }, [getAuthConfig, fetchCart, fetchAddresses, fetchOrderPreview]);
 
-  // ================= CART =================
-  const fetchCart = async () => {
-    try {
-      const token = localStorage.getItem("token");
-
-      const customerId = localStorage.getItem("customerId");
-
-      if (!token || !customerId) return;
-
-      const res = await API.get("/cart", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-
-          customerid: customerId,
-        },
-      });
-
-      setCart(res.data.cart);
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    if (!cart.length) {
+      setServerTotals(null);
+      return;
     }
-  };
 
-  // ================= ADDRESS =================
+    fetchOrderPreview(offerApplied ? offerCode : "").catch(() => {});
+  }, [cart, offerApplied, offerCode, fetchOrderPreview]);
 
-  const fetchAddresses = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  // ---------------- QUANTITY ----------------
 
-      const customerId = localStorage.getItem("customerId");
+  const updateQuantity = async (productId, newQuantity) => {
+    const { token, customerId, headers } = getAuthConfig();
 
-      if (!token || !customerId) return;
-
-      const res = await API.get("/addresses/my", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-
-          customerid: customerId,
-        },
-      });
-
-      setAddresses(res.data);
-
-      const primary = res.data.find((a) => a.is_primary === 1);
-
-      if (primary) {
-        setSelectedAddress(primary.id);
-      }
-    } catch (err) {
-      console.log(err);
+    if (!token || !customerId) {
+      alert("Please login first.");
+      return;
     }
-  };
-  // ================= UPDATE QUANTITY =================
-  const updateQuantity = async (productId, newQty) => {
+
     try {
-      const token = localStorage.getItem("token");
-
-      const customerId = localStorage.getItem("customerId");
-
-      if (!token || !customerId) return;
-
-      // REMOVE ITEM
-
-      if (newQty < 1) {
-        await API.delete(`/cart/${productId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-
-            customerid: customerId,
+      if (newQuantity < 1) {
+        await API.delete(`/cart/${productId}`, { headers });
+      } else {
+        await API.put(
+          "/cart/update",
+          {
+            product_id: productId,
+            quantity: newQuantity,
           },
-        });
-
-        // refresh page cart
-        fetchCart();
-
-        // refresh navbar count
-        window.dispatchEvent(new Event("storage"));
-
-        return;
+          { headers },
+        );
       }
 
-      // UPDATE
-
-      await API.put(
-        "/cart/update",
-        {
-          product_id: productId,
-
-          quantity: newQty,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-
-            customerid: customerId,
-          },
-        },
+      await fetchCart();
+      notifyCartUpdated();
+    } catch (error) {
+      console.error(
+        "Unable to update cart:",
+        error.response?.data || error.message,
       );
 
-      fetchCart();
-
-      // refresh navbar count
-      window.dispatchEvent(new Event("storage"));
-    } catch (err) {
-      console.log(err);
+      alert(
+        error.response?.data?.message ||
+          "Unable to update your cart. Please try again.",
+      );
     }
   };
 
-  // ================= oFFER =================
-  const applyOffer = () => {
-    if (offerCode === "FIRSTORDERCC") {
-      setDiscountPercent(15);
+  // ---------------- OFFER ----------------
 
+  const applyOffer = async () => {
+    const code = offerCode.trim().toUpperCase();
+
+    if (!code) {
+      alert("Please enter an offer code.");
+      return;
+    }
+
+    try {
+      await fetchOrderPreview(code);
+
+      setOfferCode(code);
+      setDiscountPercent(code === "FIRSTORDERCC" ? 15 : 0);
       setOfferApplied(true);
 
-      alert("Offer Applied ✅");
-    } else {
-      alert("Invalid Offer");
+      alert("Offer applied.");
+    } catch (error) {
+      setOfferApplied(false);
+      setDiscountPercent(0);
+      setServerTotals(null);
+
+      alert(
+        error.response?.data?.message ||
+          error.message ||
+          "This offer cannot be applied.",
+      );
     }
   };
-
-  // ================= rEMOVE OFFER====================
 
   const removeOffer = () => {
     setOfferApplied(false);
-
     setOfferCode("");
-
     setDiscountPercent(0);
+    fetchOrderPreview("").catch(() => {});
   };
 
-  // ================= TOTALS =================
+  // ---------------- TOTALS ----------------
 
-  const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
+  const subtotal = Number(
+    serverTotals?.subtotal ??
+      cart.reduce(
+        (sum, item) =>
+          sum + Number(item.price || 0) * Number(item.quantity || 0),
+        0,
+      ),
   );
 
-  const discount = subtotal * (discountPercent / 100);
+  const discount = Number(serverTotals?.discount ?? 0);
 
-  const taxableAmount = subtotal - discount;
+  const discountPercentFromServer = Number(
+    serverTotals?.discountPercent ?? discountPercent,
+  );
 
-  const gst = taxableAmount * 0.18;
+  const shipping = Number(serverTotals?.shipping ?? 0);
+  const total = Number(serverTotals?.total ?? 0);
 
-  // Product value INCLUDING GST
-  const orderValue = taxableAmount + gst;
+  const totalsReady = Boolean(serverTotals) && !isLoadingTotals;
 
-  const shipping = orderValue > 5000 ? 0 : 150;
+  // ---------------- VERIFY PAYMENT ----------------
 
-  const total = orderValue + shipping;
+  const verifyPayment = async (
+    order,
+    paymentResponse,
+    auth,
+    checkoutDetails,
+  ) => {
+    if (isVerifyingPayment) return;
 
-  // ================= EMPTY CART =================
+    setIsVerifyingPayment(true);
+
+    try {
+      const verification = await API.post(
+        "/payments/verify",
+        {
+          orderId: order.orderId,
+          razorpay_order_id: paymentResponse.razorpay_order_id,
+          razorpay_payment_id: paymentResponse.razorpay_payment_id,
+          razorpay_signature: paymentResponse.razorpay_signature,
+        },
+        { headers: auth.headers },
+      );
+
+      if (!verification.data?.success) {
+        throw new Error(
+          verification.data?.message ||
+            "Payment verification has not completed.",
+        );
+      }
+
+      /*
+       * Payment is confirmed by the backend.
+       *
+       * The backend must also clear this customer's database cart
+       * after successful verification. This request refreshes the
+       * frontend from that authoritative database state.
+       */
+      try {
+        await fetchCart();
+      } catch (refreshError) {
+        // Don't treat a cart-refresh failure as payment failure.
+        // The payment was already confirmed by the backend.
+        console.error(
+          "Payment confirmed, but cart refresh failed:",
+          refreshError.message,
+        );
+
+        setCart([]);
+      }
+
+      notifyCartUpdated();
+
+      // Keep the confirmed order ID available if the page is refreshed.
+      sessionStorage.setItem("confirmedOrderId", String(order.orderId));
+
+      navigate("/order-success", {
+        replace: true,
+        state: {
+          ...checkoutDetails,
+          orderId: order.orderId,
+          orderNumber: order.orderNumber || `Order ${order.orderId}`,
+          razorpayOrderId: paymentResponse.razorpay_order_id,
+          razorpayPaymentId: paymentResponse.razorpay_payment_id,
+          amount: Number(order.amount) / 100,
+          currency: order.currency || "INR",
+          paymentStatus: "paid",
+          status: "processing",
+          paidAt: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      console.error(
+        "Payment verification failed:",
+        error.response?.data || error.message,
+      );
+
+      alert(
+        "Payment was submitted, but confirmation is pending. " +
+          "Please check your order status before attempting another payment.",
+      );
+    } finally {
+      setIsVerifyingPayment(false);
+      setIsCheckingOut(false);
+    }
+  };
+
+  // ---------------- RAZORPAY CHECKOUT ----------------
+
+  const proceedToCheckout = async () => {
+    if (isCheckingOut || isVerifyingPayment) return;
+
+    const auth = getAuthConfig();
+
+    if (!auth.token || !auth.customerId) {
+      alert("Please login first.");
+      return;
+    }
+
+    if (!selectedAddress) {
+      alert("Please select a delivery address.");
+      return;
+    }
+
+    if (!deliveryDate) {
+      alert("Please select a delivery date.");
+      return;
+    }
+
+    if (!timeSlot) {
+      alert("Please select a delivery time slot.");
+      return;
+    }
+
+    if (subtotal < 2000) {
+      alert("Minimum order value is ₹2,000.");
+      return;
+    }
+
+    if (!totalsReady || !serverTotals) {
+      alert("Order totals are still loading. Please try again.");
+      return;
+    }
+
+    setIsCheckingOut(true);
+
+    try {
+      const response = await API.post(
+        "/orders/create",
+        {
+          address_id: selectedAddress,
+          delivery_date: deliveryDate,
+          time_slot: timeSlot,
+          notes,
+          offerCode: offerApplied ? offerCode : "",
+        },
+        { headers: auth.headers },
+      );
+
+      const order = response.data;
+
+      if (
+        !order?.success ||
+        !order?.keyId ||
+        !order?.razorpayOrderId ||
+        order?.orderId == null ||
+        !Number.isSafeInteger(Number(order.amount)) ||
+        Number(order.amount) <= 0
+      ) {
+        throw new Error(
+          order?.message ||
+            "The server did not return all required Razorpay order details.",
+        );
+      }
+
+      if (order.currency && order.currency !== "INR") {
+        throw new Error("Unexpected payment currency returned by server.");
+      }
+
+      const selectedAddressDetails = addresses.find(
+        (address) => String(address.id) === String(selectedAddress),
+      );
+
+      const checkoutDetails = {
+        items: cart.map((item) => ({
+          product_id: item.product_id,
+          name: item.name,
+          image: item.image,
+          weight: item.weight,
+          price: Number(item.price || 0),
+          quantity: Number(item.quantity || 0),
+          lineTotal: Number(item.price || 0) * Number(item.quantity || 0),
+        })),
+
+        address: selectedAddressDetails
+          ? {
+              name: selectedAddressDetails.name,
+              address_line: selectedAddressDetails.address_line,
+              city: selectedAddressDetails.city,
+              pincode: selectedAddressDetails.pincode,
+              phone: selectedAddressDetails.phone,
+            }
+          : null,
+
+        deliveryDate,
+        timeSlot,
+        notes,
+        subtotal: Number(serverTotals?.subtotal ?? subtotal),
+        discount: Number(serverTotals?.discount ?? discount),
+        shipping: Number(serverTotals?.shipping ?? shipping),
+        total: Number(order.amount) / 100,
+      };
+
+      const scriptLoaded = await loadRazorpayScript();
+
+      if (!scriptLoaded || !window.Razorpay) {
+        throw new Error(
+          "Razorpay Checkout could not load. Please check your internet connection.",
+        );
+      }
+
+      const options = {
+        key: order.keyId,
+        amount: Number(order.amount),
+        currency: order.currency || "INR",
+        name: "Captain's Choice",
+        description: `Order ${order.orderNumber || order.orderId}`,
+        order_id: order.razorpayOrderId,
+
+        handler: (paymentResponse) => {
+          verifyPayment(order, paymentResponse, auth, checkoutDetails);
+        },
+
+        modal: {
+          ondismiss: () => {
+            setIsCheckingOut(false);
+          },
+        },
+
+        theme: {
+          color: "#214321",
+        },
+      };
+
+      const checkout = new window.Razorpay(options);
+
+      checkout.on("payment.failed", (event) => {
+        console.error(
+          "Razorpay payment failed:",
+          event?.error?.code,
+          event?.error?.description,
+        );
+
+        alert(event?.error?.description || "Payment failed. Please try again.");
+
+        setIsCheckingOut(false);
+      });
+
+      checkout.open();
+    } catch (error) {
+      console.error(
+        "Checkout could not start:",
+        error.response?.data || error.message,
+      );
+
+      alert(
+        error.response?.data?.message ||
+          error.message ||
+          "Unable to start checkout. Please try again.",
+      );
+
+      setIsCheckingOut(false);
+    }
+  };
+
+  // ---------------- EMPTY CART ----------------
 
   if (cart.length === 0) {
     return (
       <div className="empty-cart-page">
         <h1>Your Cart is Empty 🛒</h1>
-
         <p>Add some fresh products to continue shopping</p>
 
         <button
+          type="button"
           className="continue-btn"
-          onClick={() => (window.location.href = "/shop")}
+          onClick={() => navigate("/shop")}
         >
           Continue Shopping
         </button>
@@ -206,61 +592,10 @@ function CartPage() {
     );
   }
 
-  // ================= Proceed Checkout CART PAGE =================
-  const proceedToCheckout = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const customerId = localStorage.getItem("customerId");
-
-      if (!token || !customerId) {
-        alert("Please login first");
-        return;
-      }
-
-      if (!selectedAddress) {
-        alert("Please select delivery address");
-        return;
-      }
-
-      if (!deliveryDate) {
-        alert("Please select delivery date");
-        return;
-      }
-
-      if (!timeSlot || timeSlot === "Select Slot") {
-        alert("Please select delivery slot");
-        return;
-      }
-
-      const res = await API.post(
-        "/orders/create",
-        {
-          address_id: selectedAddress,
-          delivery_date: deliveryDate,
-          time_slot: timeSlot,
-          notes,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            customerid: customerId,
-          },
-        },
-      );
-
-      console.log("ORDER CREATED:", res.data);
-
-      alert("Order Created Successfully");
-    } catch (error) {
-      console.log(error);
-
-      alert(error?.response?.data?.message || "Failed to create order");
-    }
-  };
+  // ---------------- CART PAGE ----------------
 
   return (
     <>
-      {/* BREADCRUMB */}
       <div className="breadcrumb-wrapper">
         <div className="breadcrumb">
           <Link to="/">
@@ -268,48 +603,43 @@ function CartPage() {
           </Link>
 
           <span className="breadcrumb-separator">/</span>
-
           <span className="active-breadcrumb">Cart</span>
         </div>
       </div>
 
       <div className="cart-page">
-        {/* TOP */}
         <div className="cart-top">
           <div>
             <h1>Cart</h1>
-
-            <p>{cart.length} items in your cart</p>
+            <p>
+              {cart.reduce((sum, item) => sum + Number(item.quantity || 0), 0)}{" "}
+              items in your cart
+            </p>
           </div>
+
           <Link to="/shop">
-            <button className="continue-btn">Continue Shopping</button>
+            <button type="button" className="continue-btn">
+              Continue Shopping
+            </button>
           </Link>
         </div>
 
-        {/* NOTICE */}
         <div className="notice-box">
-          Important Note : Minimum Cart value should be ₹2k to place an order
+          Important Note: Minimum Cart value should be ₹2k to place an order
         </div>
 
-        {/* LAYOUT */}
         <div className="cart-layout">
-          {/* LEFT */}
           <div className="cart-left">
-            {/* CART ITEMS */}
             <div className="cart-card">
               <div className="cart-header">
                 <div>Product</div>
-
                 <div>Price/kg</div>
-
                 <div>Quantity</div>
-
                 <div>Total</div>
               </div>
 
               {cart.map((item) => (
                 <div className="cart-item" key={item.product_id}>
-                  {/* PRODUCT */}
                   <div className="product-side">
                     <img
                       src={`${BASE_URL}/uploads/products/${item.image}`}
@@ -318,20 +648,24 @@ function CartPage() {
 
                     <div className="product-info">
                       <h3>{item.name}</h3>
-
                       <p>{item.weight}</p>
                     </div>
                   </div>
 
-                  {/* PRICE */}
-                  <div className="price">₹{item.price}</div>
+                  <div className="price">
+                    ₹{Number(item.price || 0).toFixed(2)}
+                  </div>
 
-                  {/* QTY */}
                   <div className="qty-box">
                     <button
+                      type="button"
                       className="qty-btn"
+                      aria-label={`Decrease quantity of ${item.name}`}
                       onClick={() =>
-                        updateQuantity(item.product_id, item.quantity - 1)
+                        updateQuantity(
+                          item.product_id,
+                          Number(item.quantity) - 1,
+                        )
                       }
                     >
                       -
@@ -340,101 +674,110 @@ function CartPage() {
                     <span>{item.quantity}</span>
 
                     <button
+                      type="button"
                       className="qty-btn"
+                      aria-label={`Increase quantity of ${item.name}`}
                       onClick={() =>
-                        updateQuantity(item.product_id, item.quantity + 1)
+                        updateQuantity(
+                          item.product_id,
+                          Number(item.quantity) + 1,
+                        )
                       }
                     >
                       +
                     </button>
                   </div>
 
-                  {/* TOTAL */}
-                  <div className="price">₹{item.price * item.quantity}</div>
+                  <div className="price">
+                    ₹
+                    {(
+                      Number(item.price || 0) * Number(item.quantity || 0)
+                    ).toFixed(2)}
+                  </div>
                 </div>
               ))}
             </div>
 
-            {/* DELIVERY */}
             <div className="delivery-box">
               <h3>Delivery Options</h3>
 
               <div className="delivery-grid">
                 <div>
-                  <label>Delivery Date *</label>
+                  <label htmlFor="delivery-date">Delivery Date *</label>
 
                   <input
+                    id="delivery-date"
                     type="date"
+                    min={new Date().toLocaleDateString("en-CA")}
                     value={deliveryDate}
-                    onChange={(e) => setDeliveryDate(e.target.value)}
+                    onChange={(event) => setDeliveryDate(event.target.value)}
                   />
                 </div>
 
                 <div>
-                  <label>Time Slot *</label>
+                  <label htmlFor="delivery-slot">Time Slot *</label>
 
                   <select
+                    id="delivery-slot"
                     value={timeSlot}
-                    onChange={(e) => setTimeSlot(e.target.value)}
+                    onChange={(event) => setTimeSlot(event.target.value)}
                   >
-                    <option>Select Slot</option>
-
-                    <option>7am - 11am</option>
-
-                    <option>11am - 2pm</option>
-
-                    <option>2pm - 5pm</option>
+                    <option value="">Select Slot</option>
+                    <option value="7am - 11am">7am - 11am</option>
+                    <option value="11am - 2pm">11am - 2pm</option>
+                    <option value="2pm - 5pm">2pm - 5pm</option>
                   </select>
                 </div>
               </div>
             </div>
 
-            {/* NOTES */}
             <div className="note-box">
               <h3>Special Instructions</h3>
 
               <textarea
                 placeholder="Any special requirements..."
                 value={notes}
-                onChange={(e) => setNotes(e.target.value)}
+                onChange={(event) => setNotes(event.target.value)}
               />
             </div>
 
-            {/* ADDRESS */}
             <div className="address-box">
               <h3>Delivery Address</h3>
+
+              {addresses.length === 0 && (
+                <p>
+                  No saved addresses found. Please add a delivery address before
+                  checkout.
+                </p>
+              )}
 
               {addresses.map((address) => (
                 <div
                   key={address.id}
                   className={`modern-address-card ${
-                    selectedAddress === address.id
+                    String(selectedAddress) === String(address.id)
                       ? "active-modern-address"
                       : ""
                   }`}
                   onClick={() => setSelectedAddress(address.id)}
                 >
-                  {/* NAME */}
                   <div className="address-name">{address.name}</div>
 
-                  {/* ADDRESS */}
                   <div className="address-line">{address.address_line}</div>
 
-                  {/* CITY + PINCODE */}
                   <div className="address-city">
                     {address.city} - {address.pincode}
                   </div>
 
-                  {/* PHONE */}
                   <div className="address-phone">{address.phone}</div>
 
-                  {/* PRIMARY */}
-                  {address.is_primary === 1 && (
+                  {(address.is_primary === 1 ||
+                    address.is_primary === true ||
+                    address.is_primary === "1") && (
                     <span className="modern-primary-badge">Primary</span>
                   )}
 
-                  {/* SELECTED MESSAGE */}
-                  {selectedAddress === address.id && (
+                  {String(selectedAddress) === String(address.id) && (
                     <div className="selected-address-msg">
                       ✓ Selected — Your order will be delivered here
                     </div>
@@ -444,51 +787,55 @@ function CartPage() {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="cart-summary">
             <h2 className="summary-title">Order Summary</h2>
 
-            {/* OFFER */}
             <div className="offer-box">
-              <label>Apply Offer Code</label>
+              <label htmlFor="offer-code">Apply Offer Code</label>
 
               {!offerApplied ? (
                 <div className="offer-row">
                   <input
+                    id="offer-code"
                     placeholder="#FIRSTORDERCC"
                     value={offerCode}
-                    onChange={(e) => setOfferCode(e.target.value)}
+                    onChange={(event) => setOfferCode(event.target.value)}
                   />
 
-                  <button onClick={applyOffer}>Apply</button>
+                  <button
+                    type="button"
+                    onClick={applyOffer}
+                    disabled={isLoadingTotals}
+                  >
+                    Apply
+                  </button>
                 </div>
               ) : (
                 <div className="applied-offer">
                   <span>{offerCode}</span>
 
-                  <button onClick={removeOffer}>Remove</button>
+                  <button type="button" onClick={removeOffer}>
+                    Remove
+                  </button>
                 </div>
               )}
             </div>
 
-            {/* SAVING */}
             {offerApplied && (
               <div className="saving-box">
                 <h4>Offer Applied. You're Saving</h4>
-
-                <h2>₹{discount.toFixed(0)}</h2>
+                <h2>₹{discount.toFixed(2)}</h2>
               </div>
             )}
 
-            {/* TOTALS */}
             <div className="summary-row">
               <span>Order Value</span>
-              <span>₹{orderValue.toFixed(2)}</span>
+              <span>₹{subtotal.toFixed(2)}</span>
             </div>
 
-            {discountPercent > 0 && (
+            {discount > 0 && (
               <div className="summary-row green">
-                <span>Discount ({discountPercent}%)</span>
+                <span>Discount ({discountPercentFromServer}%)</span>
                 <span>-₹{discount.toFixed(2)}</span>
               </div>
             )}
@@ -500,9 +847,11 @@ function CartPage() {
 
             <div className="summary-row summary-total">
               <span>Total</span>
-
-              <span>₹{total.toFixed(2)}</span>
+              <span>
+                {totalsReady ? `₹${total.toFixed(2)}` : "Calculating..."}
+              </span>
             </div>
+
             <p
               style={{
                 fontSize: "12px",
@@ -512,15 +861,31 @@ function CartPage() {
             >
               * Prices are inclusive of GST
             </p>
-            <button className="help-btn">📞 Need Help? Contact Us</button>
 
-            <button className="checkout-btn" onClick={proceedToCheckout}>
-              🛒 Proceed to Checkout
+            <button type="button" className="help-btn">
+              📞 Need Help? Contact Us
+            </button>
+
+            <button
+              type="button"
+              className="checkout-btn"
+              onClick={proceedToCheckout}
+              disabled={
+                isCheckingOut ||
+                isVerifyingPayment ||
+                isLoadingTotals ||
+                !totalsReady
+              }
+            >
+              {isVerifyingPayment
+                ? "Verifying Payment..."
+                : isCheckingOut
+                  ? "Opening Checkout..."
+                  : "🛒 Proceed to Checkout"}
             </button>
 
             <div className="checkout-features">
               <p>✔ Free delivery on orders above ₹5,000</p>
-
               <p>✔ GST invoice with ITC available</p>
             </div>
           </div>

@@ -16,6 +16,7 @@ import RefundPolicy from "./pages/RefundPolicy";
 import ShippingPolicy from "./pages/ShippingPolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import CancellationPolicy from "./pages/CancellationPolicy";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 // Components
 import HeroSlider from "./components/HeroSlider";
@@ -70,90 +71,68 @@ import ProfitReport from "./admin/Reports/ProfitReport";
 import GSTReports from "./admin/Reports/GSTReports";
 import PurchaseAdmin from "./pages/admin/PurchaseAdmin";
 
-// CONTEXT
+// Context
 import { CartProvider } from "./context/CartContext";
 
 // Styles
 import "./index.css";
 
-// ================= HOME PAGE =================
-
 function HomePage() {
   return (
     <>
       <HeroSlider />
-
       <StatsSection />
-
       <Categories />
-
       <QualitySection />
-
       <ProductCarousel
         title="Fruits & Vegetables"
         subtitle="freshness guaranteed"
         category="fruits & vegetables"
       />
-
       <ProductCarousel
         title="Dairy"
         subtitle="handpicked brands"
         category="Dairy"
       />
-
       <BrandStrip />
-
       <WhyChoose />
-
       <SmartDelivery />
-
       <FAQ />
-
       <VendorCTA />
-
       <Testimonials />
     </>
   );
 }
 
-// ================= APP =================
-
 function App() {
   const [showLogin, setShowLogin] = useState(false);
+  const openLogin = () => setShowLogin(true);
 
   return (
     <CartProvider>
-      {/* TOAST */}
       <Toaster position="top-right" />
-
       <ScrollToTop />
-      {/* ROUTES */}
       <Routes>
-        {/* HOME */}
         <Route
           path="/"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)} showTopbar={true}>
+            <MainLayout openLogin={openLogin} showTopbar={true}>
               <HomePage />
             </MainLayout>
           }
         />
-
-        {/* SHOP */}
         <Route
           path="/shop"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <Shop />
             </MainLayout>
           }
         />
-
-        {/* contact */}
         <Route
           path="/contact"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <Contact />
             </MainLayout>
           }
@@ -161,34 +140,31 @@ function App() {
         <Route
           path="/terms-and-conditions"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <TermsConditions />
             </MainLayout>
           }
         />
-
         <Route
           path="/privacy-policy"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <PrivacyPolicy />
             </MainLayout>
           }
         />
-
         <Route
           path="/refund-policy"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <RefundPolicy />
             </MainLayout>
           }
         />
-
         <Route
           path="/shipping-policy"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <ShippingPolicy />
             </MainLayout>
           }
@@ -196,113 +172,90 @@ function App() {
         <Route
           path="/cancellation-policy"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <CancellationPolicy />
             </MainLayout>
           }
         />
-
         <Route
           path="/return-policy"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <ReturnPolicy />
             </MainLayout>
           }
         />
-        {/* ABOUT */}
         <Route
           path="/about"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
-              <h1 className="text-3xl font-bold text-center py-20">
+            <MainLayout openLogin={openLogin}>
+              <h1 className="py-20 text-center text-3xl font-bold">
                 About Us - Coming Soon!
               </h1>
             </MainLayout>
           }
         />
-
-        {/* PRODUCT DETAILS */}
         <Route
           path="/product/:id"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <ProductPage />
             </MainLayout>
           }
         />
-
-        {/* CART */}
         <Route
           path="/cart"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <CartPage />
             </MainLayout>
           }
         />
-
-        {/* ACCOUNT */}
+        <Route
+          path="/order-success"
+          element={
+            <MainLayout openLogin={openLogin}>
+              <OrderConfirmation />
+            </MainLayout>
+          }
+        />
         <Route
           path="/account"
           element={
-            <MainLayout openLogin={() => setShowLogin(true)}>
+            <MainLayout openLogin={openLogin}>
               <Account />
             </MainLayout>
           }
         />
 
-        {/* ADMIN LOGIN */}
         <Route path="/admin-login" element={<AdminLogin />} />
-
-        {/* ADMIN PANEL */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
-
-          <Route path="/admin/purchases" element={<PurchaseAdmin />} />
-
+          <Route path="purchases" element={<PurchaseAdmin />} />
           <Route path="approvals" element={<Approvals />} />
           <Route path="approvals/:id" element={<ApprovalDetails />} />
-
           <Route path="categories" element={<CategoriesAdmin />} />
-
-          {/* REPORTS */}
           <Route path="reports/sales" element={<SalesReport />} />
           <Route path="reports/purchase" element={<PurchaseReport />} />
           <Route path="reports/transaction" element={<TransactionReport />} />
           <Route path="reports/comparison" element={<ComparisonReport />} />
           <Route path="reports/profit" element={<ProfitReport />} />
           <Route path="reports/gstreport" element={<GSTReports />} />
-
           <Route path="products" element={<ProductAdmin />} />
-
           <Route path="users" element={<AdminUsers />} />
-
           <Route path="orders" element={<Orders />} />
-
           <Route path="inventory" element={<Inventory />} />
-
           <Route path="waste" element={<WasteManagement />} />
-
           <Route path="invoices" element={<Invoices />} />
-
           <Route path="shipping" element={<Shipping />} />
-
           <Route path="customers" element={<Customers />} />
-
           <Route path="analytics" element={<Analytics />} />
-
           <Route path="settings" element={<Settings />} />
-
           <Route path="staff" element={<StaffMembers />} />
-
           <Route path="wishlist" element={<Wishlist />} />
-
           <Route path="recurring-orders" element={<RecurringOrders />} />
         </Route>
       </Routes>
-
-      {/* LOGIN POPUP */}
       <LoginPopup isOpen={showLogin} onClose={() => setShowLogin(false)} />
     </CartProvider>
   );

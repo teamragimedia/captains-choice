@@ -44,6 +44,25 @@ function getExpectedAmountPaise(totalPrice) {
   return Number.isSafeInteger(paise) ? paise : null;
 }
 
+/*
+ * Remove only cart products that belong to this order.
+ * Assumes cart.user_id stores the customer ID and
+ * order_items.product_id identifies the purchased products.
+ *
+ * Call this only after confirming the order is paid.
+ */
+async function clearPurchasedCartItems(connection, customerId, orderId) {
+  await connection.query(
+    `DELETE c
+     FROM cart AS c
+     INNER JOIN order_items AS oi
+       ON oi.product_id = c.product_id
+     WHERE c.user_id = ?
+       AND oi.order_id = ?`,
+    [customerId, orderId],
+  );
+}
+
 /* =========================================================
    CUSTOMER PAYMENT VERIFICATION
    POST /api/payments/verify
@@ -85,7 +104,7 @@ exports.verifyPayment = async (req, res) => {
     });
   }
 
-  // First verify the checkout signature.
+  // Verify the Razorpay checkout signature.
   const expectedSignature = crypto
     .createHmac("sha256", keySecret)
     .update(`${razorpay_order_id}|${razorpay_payment_id}`)
@@ -110,7 +129,7 @@ exports.verifyPayment = async (req, res) => {
     });
   }
 
-  // Independently confirm payment status with Razorpay.
+  // Independently confirm payment with Razorpay.
   let payment;
 
   try {
@@ -193,8 +212,11 @@ exports.verifyPayment = async (req, res) => {
       });
     }
 
-    // Idempotent retry: only accept an already-paid order when
-    // the matching payment record also exists.
+    /*
+     * Idempotent retry:
+     * If payment is already recorded, safely clean up the purchased
+     * products from the cart and return success.
+     */
     if (order.payment_status === "paid") {
       const [existingPayments] = await connection.query(
         `SELECT id
@@ -204,27 +226,31 @@ exports.verifyPayment = async (req, res) => {
         [order.id, razorpay_payment_id],
       );
 
-      await connection.commit();
+      if (!existingPayments.length) {
+        await connection.rollback();
 
-      if (existingPayments.length) {
-        return res.json({
-          success: true,
-          alreadyVerified: true,
-          message: "Payment was already verified",
-          orderId: order.id,
-          paymentId: razorpay_payment_id,
-          paymentStatus: "paid",
+        console.error(
+          "Paid order is missing its matching payment record:",
+          order.id,
+        );
+
+        return res.status(409).json({
+          success: false,
+          message: "Payment records require manual review",
         });
       }
 
-      console.error(
-        "Paid order is missing its matching payment record:",
-        order.id,
-      );
+      await clearPurchasedCartItems(connection, customerId, order.id);
 
-      return res.status(409).json({
-        success: false,
-        message: "Payment records require manual review",
+      await connection.commit();
+
+      return res.json({
+        success: true,
+        alreadyVerified: true,
+        message: "Payment was already verified",
+        orderId: order.id,
+        paymentId: razorpay_payment_id,
+        paymentStatus: "paid",
       });
     }
 
@@ -237,7 +263,7 @@ exports.verifyPayment = async (req, res) => {
       });
     }
 
-    // The payment ID has a unique database index.
+    // Prevent one payment ID from being recorded twice.
     const [existingPayments] = await connection.query(
       `SELECT id
        FROM payments
@@ -277,6 +303,10 @@ exports.verifyPayment = async (req, res) => {
       throw new Error("Order payment status could not be updated");
     }
 
+    // Clear only products purchased in this order.
+    await clearPurchasedCartItems(connection, customerId, order.id);
+
+    // Commit payment, order status and cart cleanup together.
     await connection.commit();
 
     return res.json({
@@ -330,7 +360,6 @@ exports.razorpayWebhook = async (req, res) => {
     return res.status(500).send("Webhook configuration error");
   }
 
-  // A parsed JSON object cannot replace the original raw bytes.
   if (!Buffer.isBuffer(req.body)) {
     return res.status(400).send("Raw webhook body is required");
   }
@@ -355,7 +384,6 @@ exports.razorpayWebhook = async (req, res) => {
     "order.paid",
   ]);
 
-  // Acknowledge other validly signed events without processing them.
   if (!supportedEvents.has(eventType)) {
     return res.status(200).json({
       success: true,
@@ -373,8 +401,7 @@ exports.razorpayWebhook = async (req, res) => {
 
   const paymentEntity = event.payload?.payment?.entity;
 
-  // Record failed attempts, but do not mark an order failed:
-  // a customer may make another payment attempt.
+  // Record failed attempts, but leave the order available for retry.
   if (eventType === "payment.failed") {
     let connection;
 
@@ -422,7 +449,7 @@ exports.razorpayWebhook = async (req, res) => {
     return res.status(400).send("Payment entity is missing");
   }
 
-  // Confirm the captured payment independently using Razorpay's API.
+  // Confirm the captured payment independently with Razorpay.
   let payment;
 
   try {
@@ -451,8 +478,6 @@ exports.razorpayWebhook = async (req, res) => {
     connection = await db.getConnection();
     await connection.beginTransaction();
 
-    // This insert and the payment update are in the same transaction.
-    // A failed transaction can be retried by Razorpay.
     await connection.query(
       `INSERT INTO razorpay_webhook_events
         (event_id, event_type, processing_status)
@@ -463,6 +488,7 @@ exports.razorpayWebhook = async (req, res) => {
     const [orders] = await connection.query(
       `SELECT
          id,
+         customer_id,
          total_price,
          payment_status,
          payment_method,
@@ -547,6 +573,9 @@ exports.razorpayWebhook = async (req, res) => {
         throw new Error("Order payment status could not be updated");
       }
     }
+
+    // Also clean up on a verified webhook retry for an already-paid order.
+    await clearPurchasedCartItems(connection, order.customer_id, order.id);
 
     await connection.query(
       `UPDATE razorpay_webhook_events

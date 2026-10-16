@@ -1,5 +1,4 @@
-import { createContext, useEffect, useState } from "react";
-
+import { createContext, useCallback, useEffect, useState } from "react";
 import API from "../api";
 
 export const CartContext = createContext();
@@ -7,60 +6,70 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
 
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    const customerId = localStorage.getItem("customerId");
+
+    if (!token || !customerId) {
+      setCartCount(0);
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
-
-      const customerId = localStorage.getItem("customerId");
-
-      // only reset if user actually logged out
-      if (!token || !customerId) {
-        setCartCount(0);
-
-        return;
-      }
-
-      const res = await API.get("/cart", {
+      const response = await API.get("/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
-
           customerid: customerId,
         },
       });
 
-      const items = res.data.cart || [];
+      const items = Array.isArray(response.data?.cart)
+        ? response.data.cart
+        : [];
 
-      setCartCount(items.length);
-    } catch (err) {
-      console.log(err);
+      const count = items.reduce(
+        (total, item) => total + Math.max(0, Number(item.quantity) || 0),
+        0,
+      );
+
+      setCartCount(count);
+    } catch (error) {
+      console.error(
+        "Unable to refresh cart count:",
+        error.response?.data || error.message,
+      );
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchCart();
 
-    const updateCart = () => {
+    const handleCartUpdated = () => {
       fetchCart();
     };
 
-    window.addEventListener("storage", fetchCart);
+    const handleStorage = (event) => {
+      if (
+        !event ||
+        event.key === "token" ||
+        event.key === "customerId" ||
+        event.key === null
+      ) {
+        fetchCart();
+      }
+    };
 
-    window.addEventListener("cartUpdated", updateCart);
+    window.addEventListener("cartUpdated", handleCartUpdated);
+    window.addEventListener("storage", handleStorage);
 
     return () => {
-      window.removeEventListener("storage", fetchCart);
-
-      window.removeEventListener("cartUpdated", updateCart);
+      window.removeEventListener("cartUpdated", handleCartUpdated);
+      window.removeEventListener("storage", handleStorage);
     };
-  }, []);
+  }, [fetchCart]);
 
   return (
-    <CartContext.Provider
-      value={{
-        cartCount,
-        fetchCart,
-      }}
-    >
+    <CartContext.Provider value={{ cartCount, fetchCart }}>
       {children}
     </CartContext.Provider>
   );
