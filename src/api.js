@@ -1,20 +1,17 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: `${import.meta.env.VITE_SERVER_URL}/api`,
 });
 
-API.interceptors.request.use(
-  (config) => {
-    const adminToken = localStorage.getItem("adminToken");
+API.interceptors.request.use((config) => {
+  const adminToken = localStorage.getItem("adminToken");
 
-    if (adminToken) {
-      config.headers.Authorization = `Bearer ${adminToken}`;
-    }
+  if (adminToken) {
+    config.headers.Authorization = `Bearer ${adminToken}`;
+  }
 
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
+  return config;
+});
 
 export default API;
