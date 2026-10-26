@@ -112,8 +112,6 @@
   padding: 12px 22px;
   border: 1px solid var(--cart-blue);
   border-radius: 8px;
-  background: var(--cart-blue);
-  color: #ffffff !important;
   font-size: 14px;
   font-weight: 600;
   text-align: center;
@@ -121,9 +119,6 @@
   transition: background 0.2s ease;
 }
 
-.continue-btn:hover {
-  background: var(--cart-blue-dark);
-}
 
 /* =========================================
    MINIMUM ORDER NOTICE

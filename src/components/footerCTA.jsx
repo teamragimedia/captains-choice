@@ -105,10 +105,10 @@ function FooterCTA() {
         <div className="footer-col">
           <h4>Get in Touch</h4>
           <ul>
-            <li class="marker">
+            <li className="marker">
               <FaEnvelope /> Eightcap1986@gmail.com
             </li>
-            <li class="marker">
+            <li className="marker">
               <FaPhoneAlt /> +91 7899370617
             </li>
             <li className="marker">
